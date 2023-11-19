@@ -7,6 +7,7 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from "@remix-run/react";
+import Navbar from "./components/Navbar";
 import styles from "./tailwind.css";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
@@ -20,7 +21,8 @@ export default function App() {
 				<Meta />
 				<Links />
 			</head>
-			<body className="bg-slate-500">
+			<body className="bg-lime-600">
+				<Navbar />
 				<Outlet />
 				<ScrollRestoration />
 				<Scripts />
