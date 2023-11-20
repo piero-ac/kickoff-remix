@@ -21,7 +21,7 @@ export default function App() {
 				<Meta />
 				<Links />
 			</head>
-			<body className="bg-lime-600">
+			<body className="bg-lime-600 h-screen">
 				<Navbar />
 				<Outlet />
 				<ScrollRestoration />
