@@ -12,8 +12,11 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
 	return (
-		<div>
-			<h1>Home Page</h1>
+		<div className="relative w-screen h-screen">
+			<div className="absolute inset-0 z-0">
+				<div className="bg-[url('/img/soccer-pitch-sky.jpg')] bg-cover bg-center w-full h-full"></div>
+			</div>
+			<div className="absolute inset-0 bg-green-600 opacity-50 z-10"></div>
 		</div>
 	);
 }
