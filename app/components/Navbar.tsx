@@ -15,7 +15,7 @@ export default function Navbar() {
 						<Link
 							to="/"
 							className="text-lime-500 
-          text-2xl md:text-3xl font-bold"
+          text-2xl md:text-3xl font-bold italic"
 						>
 							Kick⚽ff
 						</Link>
