@@ -1,4 +1,10 @@
-import type { MetaFunction } from "@remix-run/node";
+import { type MetaFunction } from "@remix-run/node";
+import MatchesOverviewCard from "~/components/MatchesOverviewCard";
+import { Suspense } from "react";
+import { Await, useLoaderData } from "@remix-run/react";
+import { defer } from "@remix-run/node";
+import { getTodaysMatches } from "utils/api-football-functions";
+import { getDate } from "utils/datetime-functions";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -10,7 +16,18 @@ export const meta: MetaFunction = () => {
 	];
 };
 
+export const loader = async () => {
+	const today = getDate();
+	const premMatches: Promise<Match[]> = getTodaysMatches(39, "2023", today);
+	const ligaMatches: Promise<Match[]> = getTodaysMatches(140, "2023", today);
+	const bundesMatches: Promise<Match[]> = getTodaysMatches(78, "2023", today);
+	return defer({ premMatches, ligaMatches, bundesMatches });
+};
+
 export default function Index() {
+	const { premMatches, ligaMatches, bundesMatches } =
+		useLoaderData<typeof loader>();
+
 	return (
 		<div className="relative w-screen h-screen">
 			{/* Background Image */}
@@ -31,16 +48,37 @@ export default function Index() {
 					<div className="mt-3 md:mt-5 text-4xl md:text-6xl green-gradient">
 						&#x21e3;
 					</div>
-					<div className="flex flex-col md:flex-row items-center justify-between px-4 py-6 gap-4 w-[1000px] border border-black">
-						<div>
-							<h2>Premier League</h2>
-						</div>
-						<div>
-							<h2>La Liga</h2>
-						</div>
-						<div>
-							<h2>Bundesliga</h2>
-						</div>
+					<div className="flex flex-col flex-wrap sm:flex-row items-center justify-between sm:justify-center mx-2 px-2 py-6 gap-3">
+						<Suspense fallback={<p>Loading...</p>}>
+							<Await resolve={premMatches}>
+								{(resolvedMatches) => (
+									<MatchesOverviewCard
+										leagueName="Premier League"
+										matches={resolvedMatches}
+									/>
+								)}
+							</Await>
+						</Suspense>
+						<Suspense fallback={<p>Loading...</p>}>
+							<Await resolve={ligaMatches}>
+								{(resolvedMatches) => (
+									<MatchesOverviewCard
+										leagueName="La Liga"
+										matches={resolvedMatches}
+									/>
+								)}
+							</Await>
+						</Suspense>
+						<Suspense fallback={<p>Loading...</p>}>
+							<Await resolve={bundesMatches}>
+								{(resolvedMatches) => (
+									<MatchesOverviewCard
+										leagueName="Bundesliga"
+										matches={resolvedMatches}
+									/>
+								)}
+							</Await>
+						</Suspense>
 					</div>
 				</div>
 			</div>
