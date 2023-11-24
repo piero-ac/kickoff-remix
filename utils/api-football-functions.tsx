@@ -60,3 +60,28 @@ export async function getLeagueInfo(leagueId: string) {
 			);
 	}
 }
+
+export async function getLeagueStandings(leagueId: string, season: string) {
+	try {
+		const response = await fetch(
+			`https://api-football-v1.p.rapidapi.com/v3/standings?season=${season}&league=${leagueId}`,
+			options
+		);
+		if (!response.ok) {
+			throw new Error("Could not fetch standings");
+		}
+
+		const result = await response.json();
+		const { league } = result.response[0];
+		const { standings } = league;
+		return standings;
+	} catch (error: any) {
+		const err = error as Error;
+		throw json(
+			{
+				message: err.message,
+			},
+			{ status: 500 }
+		);
+	}
+}
