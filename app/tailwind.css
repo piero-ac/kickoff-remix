@@ -9,4 +9,12 @@
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
+
+	.md-height {
+		height: calc(100vh - 68px);
+	}
+
+	.sm-height {
+		height: cacl(100vh - 92px);
+	}
 }
