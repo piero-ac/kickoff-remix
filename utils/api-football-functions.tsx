@@ -73,7 +73,7 @@ export async function getLeagueStandings(leagueId: string, season: string) {
 
 		const result = await response.json();
 		const { league } = result.response[0];
-		const { standings } = league;
+		const [standings] = league.standings;
 		return standings;
 	} catch (error: any) {
 		const err = error as Error;
