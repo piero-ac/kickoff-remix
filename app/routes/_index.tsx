@@ -21,6 +21,7 @@ export const loader = async () => {
 	const premMatches: Promise<Match[]> = getTodaysMatches(39, "2023", today);
 	const ligaMatches: Promise<Match[]> = getTodaysMatches(140, "2023", today);
 	const bundesMatches: Promise<Match[]> = getTodaysMatches(78, "2023", today);
+	// throws error if any of these return undefined
 	return defer({ premMatches, ligaMatches, bundesMatches });
 };
 
