@@ -1,10 +1,10 @@
 import { type MetaFunction } from "@remix-run/node";
-import MatchesOverviewCard from "~/components/MatchesOverviewCard";
 import { Suspense } from "react";
 import { Await, useLoaderData } from "@remix-run/react";
 import { defer } from "@remix-run/node";
 import { getTodaysMatches } from "utils/api-football-functions";
 import { getDate } from "utils/datetime-functions";
+import MatchesOverviewTable from "~/components/MatchesOverviewTable";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -30,13 +30,13 @@ export default function Index() {
 		useLoaderData<typeof loader>();
 
 	return (
-		<div className="relative w-screen h-screen">
+		<div className="relative h-[sm-height] md:h-[md-height]">
 			{/* Background Image */}
 			<div className="absolute inset-0 z-0">
-				<div className="bg-[url('/img/soccer-pitch-sky.jpg')] bg-cover bg-center w-full h-full"></div>
+				<div className="bg-[url('/img/soccer-pitch-sky.jpg')] bg-cover bg-center h-full"></div>
 			</div>
 			{/* Content */}
-			<div className="absolute inset-0 z-20 mt-14">
+			<div className="absolute inset-0 z-20 mt-14 px-3">
 				<div className="text-white flex flex-col text-center items-center">
 					<h1 className="hidden md:block text-lime-500 font-bold text-9xl italic mb-5">
 						Kick⚽ff
@@ -49,37 +49,31 @@ export default function Index() {
 					<div className="mt-3 md:mt-5 text-4xl md:text-6xl green-gradient">
 						&#x21e3;
 					</div>
-					<div className="flex flex-col flex-wrap sm:flex-row items-center justify-between sm:justify-center mx-2 px-2 py-6 gap-3">
-						<Suspense fallback={<p>Loading...</p>}>
-							<Await resolve={premMatches}>
-								{(resolvedMatches) => (
-									<MatchesOverviewCard
-										leagueName="Premier League"
-										matches={resolvedMatches}
-									/>
-								)}
-							</Await>
-						</Suspense>
-						<Suspense fallback={<p>Loading...</p>}>
-							<Await resolve={ligaMatches}>
-								{(resolvedMatches) => (
-									<MatchesOverviewCard
-										leagueName="La Liga"
-										matches={resolvedMatches}
-									/>
-								)}
-							</Await>
-						</Suspense>
-						<Suspense fallback={<p>Loading...</p>}>
-							<Await resolve={bundesMatches}>
-								{(resolvedMatches) => (
-									<MatchesOverviewCard
-										leagueName="Bundesliga"
-										matches={resolvedMatches}
-									/>
-								)}
-							</Await>
-						</Suspense>
+					<div className="mt-3 flex flex-col border border-black w-full mx-6 md:max-w-[900px]">
+						<h2 className="bg-stone-900">Current Matches</h2>
+						<div className="bg-lime-200 text-black max-h-[300px] overflow-auto">
+							<Suspense fallback={<p>Loading...</p>}>
+								<Await resolve={premMatches}>
+									{(resolvedMatches) => (
+										<MatchesOverviewTable matches={resolvedMatches} />
+									)}
+								</Await>
+							</Suspense>
+							<Suspense fallback={<p>Loading...</p>}>
+								<Await resolve={ligaMatches}>
+									{(resolvedMatches) => (
+										<MatchesOverviewTable matches={resolvedMatches} />
+									)}
+								</Await>
+							</Suspense>
+							<Suspense fallback={<p>Loading...</p>}>
+								<Await resolve={bundesMatches}>
+									{(resolvedMatches) => (
+										<MatchesOverviewTable matches={resolvedMatches} />
+									)}
+								</Await>
+							</Suspense>
+						</div>
 					</div>
 				</div>
 			</div>
