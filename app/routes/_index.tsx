@@ -2,7 +2,7 @@ import { type MetaFunction } from "@remix-run/node";
 import { Suspense } from "react";
 import { Await, useLoaderData } from "@remix-run/react";
 import { defer } from "@remix-run/node";
-import { getTodaysMatches } from "utils/api-football-functions";
+import getTodaysMatches from "~/api/getTodaysMatches";
 import { getDate } from "utils/datetime-functions";
 import MatchesOverviewTable from "~/components/MatchesOverviewTable";
 
@@ -19,15 +19,12 @@ export const meta: MetaFunction = () => {
 export const loader = async () => {
 	const today = getDate();
 	const premMatches: Promise<Match[]> = getTodaysMatches(39, "2023", today);
-	const ligaMatches: Promise<Match[]> = getTodaysMatches(140, "2023", today);
-	const bundesMatches: Promise<Match[]> = getTodaysMatches(78, "2023", today);
-	// throws error if any of these return undefined
-	return defer({ premMatches, ligaMatches, bundesMatches });
+
+	return defer({ premMatches });
 };
 
 export default function Index() {
-	const { premMatches, ligaMatches, bundesMatches } =
-		useLoaderData<typeof loader>();
+	const { premMatches } = useLoaderData<typeof loader>();
 
 	return (
 		<div className="relative h-[sm-height] md:h-[md-height]">
@@ -54,20 +51,6 @@ export default function Index() {
 						<div className="bg-lime-200 text-black max-h-[300px] overflow-auto">
 							<Suspense fallback={<p>Loading...</p>}>
 								<Await resolve={premMatches}>
-									{(resolvedMatches) => (
-										<MatchesOverviewTable matches={resolvedMatches} />
-									)}
-								</Await>
-							</Suspense>
-							<Suspense fallback={<p>Loading...</p>}>
-								<Await resolve={ligaMatches}>
-									{(resolvedMatches) => (
-										<MatchesOverviewTable matches={resolvedMatches} />
-									)}
-								</Await>
-							</Suspense>
-							<Suspense fallback={<p>Loading...</p>}>
-								<Await resolve={bundesMatches}>
 									{(resolvedMatches) => (
 										<MatchesOverviewTable matches={resolvedMatches} />
 									)}
