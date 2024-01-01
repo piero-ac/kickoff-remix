@@ -1,73 +1,73 @@
-type Match = {
-	fixture: {
-		id: number;
-		referee: string;
-		timezone: string;
-		date: string;
-		timestamp: number;
-		periods: {
-			first: number;
-			second: number;
-		};
-		venue: {
-			id: number;
-			name: string;
-			city: string;
-		};
-		status: {
-			long: string;
-			short: string;
-			elapsed: number;
-		};
+interface Fixture {
+	id: number;
+	referee: string;
+	timezone: string;
+	date: string;
+	timestamp: number;
+	periods: {
+		first: number;
+		second: number;
 	};
-	league: {
+	venue: {
 		id: number;
 		name: string;
-		country: string;
-		logo: string;
-		flag: string;
-		season: number;
-		round: string;
+		city: string;
 	};
-	teams: {
-		home: {
-			id: number;
-			name: string;
-			logo: string;
-			winner: boolean;
-		};
-		away: {
-			id: number;
-			name: string;
-			logo: string;
-			winner: boolean;
-		};
+	status: {
+		long: string;
+		short: string;
+		elapsed: number;
 	};
-	goals: {
-		home: number | null;
-		away: number | null;
-	};
-	score: {
-		halftime: {
-			home: number | null;
-			away: number | null;
-		};
-		fulltime: {
-			home: number | null;
-			away: number | null;
-		};
-		extratime: {
-			home: number | null;
-			away: number | null;
-		};
-		penalty: {
-			home: number | null;
-			away: number | null;
-		};
-	};
-};
+	_id: string;
+}
 
-type League = {
+interface Team {
+	id: number;
+	name: string;
+	logo: string;
+	winner: boolean;
+	_id: string;
+}
+
+interface Goals {
+	home: number;
+	away: number;
+	_id: string;
+}
+
+interface League {
+	id: number;
+	name: string;
+	country: string;
+	logo: string;
+	flag: string;
+	season: number;
+	round: string;
+	_id: string;
+}
+
+interface Score {
+	halftime: Goals;
+	fulltime: Goals;
+	extratime: Goals;
+	penalty: Goals;
+	_id: string;
+}
+
+interface Match {
+	_id: string;
+	fixture: Fixture;
+	league: League;
+	teams: {
+		home: Team;
+		away: Team;
+	};
+	goals: Goals;
+	score: Score;
+	updatedAt: string;
+}
+
+type LeagueInfo = {
 	league: {
 		id: number;
 		name: string;
