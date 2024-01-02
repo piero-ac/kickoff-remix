@@ -1,4 +1,8 @@
-export default function Standings({ standings }: { standings: Standings[] }) {
+export default function Standings({
+	standings,
+}: {
+	standings: TeamStanding[];
+}) {
 	return (
 		<table className="bg-lime-600 w-full text-black">
 			<thead className="bg-lime-700">
