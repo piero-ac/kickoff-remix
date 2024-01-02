@@ -67,20 +67,7 @@ interface Match {
 	updatedAt: string;
 }
 
-type LeagueInfo = {
-	league: {
-		id: number;
-		name: string;
-		type: "League";
-		logo: string | null;
-	};
-	country: {
-		name: string;
-		code: string;
-		flag: string | null;
-	};
-	seasons: Season[];
-};
+type LeagueInfo = Omit<League, "round">;
 
 type Season = {
 	year: number;
@@ -105,13 +92,16 @@ type Season = {
 	};
 };
 
-type Standings = {
+interface Standings {
+	_id: string;
+	league: League;
+	standings: [TeamStanding];
+	updatedAt: string;
+}
+
+interface TeamStanding {
 	rank: number;
-	team: {
-		id: number;
-		name: string;
-		logo: string | null;
-	};
+	team: Omit<Team, "winner">;
 	points: number;
 	goalsDiff: number;
 	group: string;
@@ -123,30 +113,22 @@ type Standings = {
 		win: number;
 		draw: number;
 		lose: number;
-		goals: {
-			for: number;
-			against: number;
-		};
+		goals: { for: number; against: number };
 	};
 	home: {
 		played: number;
 		win: number;
 		draw: number;
 		lose: number;
-		goals: {
-			for: number;
-			against: number;
-		};
+		goals: { for: number; against: number };
 	};
 	away: {
 		played: number;
 		win: number;
 		draw: number;
 		lose: number;
-		goals: {
-			for: number;
-			against: number;
-		};
+		goals: { for: number; against: number };
 	};
 	update: string;
-};
+	_id: string;
+}
