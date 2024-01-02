@@ -20,10 +20,11 @@ export default async function getTodaysMatches(
 		const matches = await response.json();
 		return matches;
 	} catch (error: any) {
-		if (error instanceof Error) console.error(error.message);
+		const err = error as Error;
+		console.error(err.message);
 		throw json(
 			{
-				message: error.message,
+				message: err.message,
 			},
 			{ status: 500 }
 		);
