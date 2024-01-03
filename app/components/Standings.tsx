@@ -4,26 +4,21 @@ export default function Standings({
 	standings: TeamStanding[];
 }) {
 	return (
-		<table className="bg-lime-600 w-full text-black">
-			<thead className="bg-lime-700">
-				<th>#</th>
-				<th className="w-[120px]">Team</th>
+		<table className="w-[300px] md:w-[400px] rounded-b-lg text-darkpurple">
+			<thead className="bg-brightwhite  text-sm border-b border-b-cyan">
+				<th>Pos</th>
+				<th>Team</th>
 				<th>P</th>
 				<th className="hidden md:table-cell">W</th>
 				<th className="hidden md:table-cell">D</th>
 				<th className="hidden md:table-cell">L</th>
-				<th className="hidden md:table-cell">F</th>
-				<th className="hidden md:table-cell">A</th>
 				<th>GD</th>
 				<th>Pts</th>
 			</thead>
 			<tbody>
 				{standings.length > 0 ? (
 					standings.map((team, index) => (
-						<tr
-							key={team.rank}
-							className={`text-center ${index % 2 === 0 ? "" : "bg-lime-200"}`}
-						>
+						<tr key={team.rank} className="text-center bg-brightwhite">
 							<td>{team.rank}</td>
 							<td className="flex flex-row w-[170px] text-sm">
 								<img
@@ -38,12 +33,6 @@ export default function Standings({
 							<td className="hidden md:table-cell">{team.all.win || 0}</td>
 							<td className="hidden md:table-cell">{team.all.draw || 0}</td>
 							<td className="hidden md:table-cell">{team.all.lose || 0}</td>
-							<td className="hidden md:table-cell">
-								{team.all.goals.for || 0}
-							</td>
-							<td className="hidden md:table-cell">
-								{team.all.goals.against || 0}
-							</td>
 							<td>{team.goalsDiff || 0}</td>
 							<td>{team.points || 0}</td>
 						</tr>
