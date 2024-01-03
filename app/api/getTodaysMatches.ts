@@ -17,6 +17,11 @@ export default async function getTodaysMatches(
 			);
 		}
 
+		// No Matches today
+		if (response.status === 204) {
+			return [];
+		}
+
 		const matches = await response.json();
 		return matches;
 	} catch (error: any) {
