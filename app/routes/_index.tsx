@@ -1,7 +1,6 @@
 import { type MetaFunction } from "@remix-run/node";
-import { Suspense } from "react";
-import { Await, useLoaderData, useRouteError } from "@remix-run/react";
-import { defer, json } from "@remix-run/node";
+import { useLoaderData, useRouteError } from "@remix-run/react";
+import { json } from "@remix-run/node";
 import getTodaysMatches from "~/api/getTodaysMatches";
 import getLeagueStandings from "~/api/getLeagueStandings";
 import getMatchdates from "~/api/getMatchdates";
