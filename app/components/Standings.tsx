@@ -5,10 +5,10 @@ export default function Standings({
 }) {
 	return (
 		<>
-			<h2 className="cyan-gradient text-brightwhite font-bold text-center text-3xl py-1 rounded-t-lg w-[300px] md:w-[400px]">
+			<h2 className="cyan-gradient text-brightwhite font-bold text-center text-2xl md:text-3xl py-1 rounded-t-lg w-[300px] md:w-[385px]">
 				League Standings
 			</h2>
-			<table className="w-[300px] md:w-[400px] rounded-b-lg text-darkpurple">
+			<table className="w-[300px] md:w-[385px] rounded-b-lg text-darkpurple">
 				<thead className="bg-brightwhite  text-sm border-b border-b-cyan">
 					<th>Pos</th>
 					<th>Team</th>
