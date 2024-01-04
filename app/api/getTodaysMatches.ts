@@ -22,7 +22,7 @@ export default async function getTodaysMatches(
 			return [];
 		}
 
-		const matches = await response.json();
+		const matches: Match[] = await response.json();
 		return matches;
 	} catch (error: any) {
 		const err = error as Error;
