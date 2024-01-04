@@ -23,9 +23,9 @@ export default function Navbar() {
 							Matches
 						</Link>
 						<Link
-							to={`/`}
+							to={`/teams`}
 							className="text-brightwhite text-xl md:text-2xl font-bold hover:text-hotpink"
-							aria-label="matches"
+							aria-label="teams"
 						>
 							Teams
 						</Link>
