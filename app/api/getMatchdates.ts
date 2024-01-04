@@ -6,14 +6,14 @@ export default async function getTodaysMatches(
 ) {
 	try {
 		const url =
-			process.env.BACKEND_URL + `matches/machdates/${leagueId}/${season}`;
+			process.env.BACKEND_URL + `matches/matchdates/${leagueId}/${season}`;
 		const response = await fetch(url);
 
 		if (!response.ok) {
 			throw json({ message: "Could not fetch matchdates" }, { status: 500 });
 		}
 
-		const matchdates: String[] = await response.json();
+		const matchdates: string[] = await response.json();
 		return matchdates;
 	} catch (error: any) {
 		const err = error as Error;
