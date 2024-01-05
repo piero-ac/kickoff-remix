@@ -3,10 +3,15 @@
 @tailwind utilities;
 
 @layer utilities {
-	.green-gradient {
-		background: #17fc2d;
-		background: linear-gradient(to right, #aaf0b0 0%, #78e737 38%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+	.cyan-gradient {
+		background: linear-gradient(45deg, #04f5ff 0%, #b11bda 100%);
+	}
+
+	.md-height {
+		height: calc(100vh - 68px);
+	}
+
+	.sm-height {
+		height: cacl(100vh - 92px);
 	}
 }

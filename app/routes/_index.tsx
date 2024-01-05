@@ -1,10 +1,12 @@
 import { type MetaFunction } from "@remix-run/node";
-import MatchesOverviewCard from "~/components/MatchesOverviewCard";
-import { Suspense } from "react";
-import { Await, useLoaderData } from "@remix-run/react";
-import { defer } from "@remix-run/node";
-import { getTodaysMatches } from "utils/api-football-functions";
-import { getDate } from "utils/datetime-functions";
+import { useLoaderData, useRouteError } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import getTodaysMatches from "~/api/getTodaysMatches";
+import getLeagueStandings from "~/api/getLeagueStandings";
+import getMatchdates from "~/api/getMatchdates";
+import { getDate, getNextMatchdate } from "utils/datetime-functions";
+import Standings from "~/components/Standings";
+import MatchesOverviewTable from "~/components/MatchesOverviewTable";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -18,72 +20,69 @@ export const meta: MetaFunction = () => {
 
 export const loader = async () => {
 	const today = getDate();
-	const premMatches: Promise<Match[]> = getTodaysMatches(39, "2023", today);
-	const ligaMatches: Promise<Match[]> = getTodaysMatches(140, "2023", today);
-	const bundesMatches: Promise<Match[]> = getTodaysMatches(78, "2023", today);
-	return defer({ premMatches, ligaMatches, bundesMatches });
+	const matchdates = await getMatchdates(39, "2023");
+	const nextMatchdate = getNextMatchdate(matchdates, today);
+	const leagueStandings: Standings = await getLeagueStandings("39", "2023");
+	let matches: {
+		premMatches: Match[];
+		seasonComplete: boolean;
+		today: string;
+		nextMatchdate: string;
+	} = {
+		premMatches: [],
+		seasonComplete: false,
+		today,
+		nextMatchdate,
+	};
+	if (nextMatchdate !== "Season Completed") {
+		matches.premMatches = await getTodaysMatches(39, "2023", nextMatchdate);
+	} else {
+		matches.seasonComplete = true;
+	}
+	return json({ matches, leagueStandings });
 };
 
 export default function Index() {
-	const { premMatches, ligaMatches, bundesMatches } =
-		useLoaderData<typeof loader>();
+	const { matches, leagueStandings } = useLoaderData<typeof loader>();
 
 	return (
-		<div className="relative w-screen h-screen">
-			{/* Background Image */}
-			<div className="absolute inset-0 z-0">
-				<div className="bg-[url('/img/soccer-pitch-sky.jpg')] bg-cover bg-center w-full h-full"></div>
-			</div>
-			{/* Content */}
-			<div className="absolute inset-0 z-20 mt-14">
-				<div className="text-white flex flex-col text-center items-center">
-					<h1 className="hidden md:block text-lime-500 font-bold text-9xl italic mb-5">
-						Kick⚽ff
-					</h1>
-					<p className="text-3xl sm:text-4xl sm:w-[400px] md:text-5xl font-semibold text-lime-100 md:w-[500px]">
-						View <span className="green-gradient ">Matches</span>,
-						<span className="green-gradient"> Scores</span>, and
-						<span className="green-gradient"> Statistics</span>!
-					</p>
-					<div className="mt-3 md:mt-5 text-4xl md:text-6xl green-gradient">
-						&#x21e3;
-					</div>
-					<div className="flex flex-col flex-wrap sm:flex-row items-center justify-between sm:justify-center mx-2 px-2 py-6 gap-3">
-						<Suspense fallback={<p>Loading...</p>}>
-							<Await resolve={premMatches}>
-								{(resolvedMatches) => (
-									<MatchesOverviewCard
-										leagueName="Premier League"
-										matches={resolvedMatches}
-									/>
-								)}
-							</Await>
-						</Suspense>
-						<Suspense fallback={<p>Loading...</p>}>
-							<Await resolve={ligaMatches}>
-								{(resolvedMatches) => (
-									<MatchesOverviewCard
-										leagueName="La Liga"
-										matches={resolvedMatches}
-									/>
-								)}
-							</Await>
-						</Suspense>
-						<Suspense fallback={<p>Loading...</p>}>
-							<Await resolve={bundesMatches}>
-								{(resolvedMatches) => (
-									<MatchesOverviewCard
-										leagueName="Bundesliga"
-										matches={resolvedMatches}
-									/>
-								)}
-							</Await>
-						</Suspense>
-					</div>
-				</div>
-			</div>
-			{/* Overlay */}
-			<div className="absolute inset-0 bg-green-600 opacity-50 z-10"></div>
+		<div className="my-1">
+			{/* Header */}
+			<header className="mt-5 mb-5 h-[150px] md:h-[200px] cyan-gradient flex flex-col sm:flex-row justify-center items-center">
+				<h1 className=" text-brightwhite font-bold text-5xl md:text-7xl ">
+					Premier League
+				</h1>
+				<img
+					src="/img/premierleague-logo.png"
+					className="h-[50px] w-[50px] md:h-[120px] md:w-[120px]"
+					alt="Premier League Logo"
+				/>
+			</header>
+			<section className="flex flex-col-reverse sm:flex-row items-center justify-center max-w-5xl mx-auto gap-2 lg:gap-4 px-1">
+				{/* League Table */}
+				<section className="rounded-lg w-[300px] md:w-[400px]">
+					<Standings standings={leagueStandings.standings} />
+				</section>
+				{/* Live Matches */}
+				<aside className="rounded-lg sm:self-start">
+					<MatchesOverviewTable
+						matches={matches.premMatches}
+						seasonComplete={matches.seasonComplete}
+						today={matches.today}
+						nextMatchdate={matches.nextMatchdate}
+					/>
+				</aside>
+			</section>
+		</div>
+	);
+}
+
+export function ErrorBoundary() {
+	const error = useRouteError() as Error;
+	return (
+		<div>
+			<h1>Something went wrong!</h1>
+			{error.message}
 		</div>
 	);
 }

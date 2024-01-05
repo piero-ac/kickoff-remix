@@ -38,3 +38,22 @@ export function getDate() {
 	const formattedDate = `${year}-${month}-${day}`;
 	return formattedDate;
 }
+
+export function getNextMatchdate(matchdates: string[], today: string) {
+	const indexOfToday = matchdates.indexOf(today);
+
+	if (indexOfToday === -1) {
+		// If today's date is not in the array, find the next available date
+		const nextDateIndex = matchdates.findIndex((date) => date > today);
+
+		if (nextDateIndex !== -1) {
+			const nextAvailableDate = matchdates[nextDateIndex];
+			return nextAvailableDate;
+			// Use nextAvailableDate as needed
+		} else {
+			return "Season Completed";
+		}
+	} else {
+		return today;
+	}
+}

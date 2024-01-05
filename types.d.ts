@@ -1,68 +1,134 @@
-type Match = {
-	fixture: {
-		id: number;
-		referee: string;
-		timezone: string;
-		date: string;
-		timestamp: number;
-		periods: {
-			first: number;
-			second: number;
-		};
-		venue: {
-			id: number;
-			name: string;
-			city: string;
-		};
-		status: {
-			long: string;
-			short: string;
-			elapsed: number;
-		};
+interface Fixture {
+	id: number;
+	referee: string;
+	timezone: string;
+	date: string;
+	timestamp: number;
+	periods: {
+		first: number;
+		second: number;
 	};
-	league: {
+	venue: {
 		id: number;
 		name: string;
-		country: string;
-		logo: string;
-		flag: string;
-		season: number;
-		round: string;
+		city: string;
 	};
+	status: {
+		long: string;
+		short: string;
+		elapsed: number;
+	};
+	_id: string;
+}
+
+interface Team {
+	id: number;
+	name: string;
+	logo: string;
+	winner: boolean;
+	_id: string;
+}
+
+interface Goals {
+	home: number;
+	away: number;
+	_id: string;
+}
+
+interface League {
+	id: number;
+	name: string;
+	country: string;
+	logo: string;
+	flag: string;
+	season: number;
+	round: string;
+	_id: string;
+}
+
+interface Score {
+	halftime: Goals;
+	fulltime: Goals;
+	extratime: Goals;
+	penalty: Goals;
+	_id: string;
+}
+
+interface Match {
+	_id: string;
+	fixture: Fixture;
+	league: League;
 	teams: {
-		home: {
-			id: number;
-			name: string;
-			logo: string;
-			winner: boolean;
-		};
-		away: {
-			id: number;
-			name: string;
-			logo: string;
-			winner: boolean;
-		};
+		home: Team;
+		away: Team;
 	};
-	goals: {
-		home: number | null;
-		away: number | null;
-	};
-	score: {
-		halftime: {
-			home: number | null;
-			away: number | null;
+	goals: Goals;
+	score: Score;
+	updatedAt: string;
+}
+
+type LeagueInfo = Omit<League, "round">;
+
+type Season = {
+	year: number;
+	start: string;
+	end: string;
+	current: boolean;
+	coverage: {
+		fixtures: {
+			events: boolean;
+			lineups: boolean;
+			statistics_fixtures: boolean;
+			statistics_players: boolean;
 		};
-		fulltime: {
-			home: number | null;
-			away: number | null;
-		};
-		extratime: {
-			home: number | null;
-			away: number | null;
-		};
-		penalty: {
-			home: number | null;
-			away: number | null;
-		};
+		standings: boolean;
+		players: boolean;
+		top_scorers: boolean;
+		top_assists: boolean;
+		top_cards: boolean;
+		injuries: boolean;
+		predictions: boolean;
+		odds: boolean;
 	};
 };
+
+interface Standings {
+	_id: string;
+	league: League;
+	standings: [TeamStanding];
+	updatedAt: string;
+}
+
+interface TeamStanding {
+	rank: number;
+	team: Omit<Team, "winner">;
+	points: number;
+	goalsDiff: number;
+	group: string;
+	form: string;
+	status: string;
+	description: string;
+	all: {
+		played: number;
+		win: number;
+		draw: number;
+		lose: number;
+		goals: { for: number; against: number };
+	};
+	home: {
+		played: number;
+		win: number;
+		draw: number;
+		lose: number;
+		goals: { for: number; against: number };
+	};
+	away: {
+		played: number;
+		win: number;
+		draw: number;
+		lose: number;
+		goals: { for: number; against: number };
+	};
+	update: string;
+	_id: string;
+}

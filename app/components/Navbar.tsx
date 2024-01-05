@@ -1,37 +1,34 @@
 import { Link } from "@remix-run/react";
 
-const Leagues = [
-	{ id: 39, name: "Premier League", nameShort: "🇬🇧 PL" },
-	{ id: 140, name: "La Liga", nameShort: "🇪🇸 LL" },
-	{ id: 78, name: "Bundesliga", nameShort: "🇩🇪 BDL" },
-];
-
 export default function Navbar() {
 	return (
-		<nav className="bg-stone-900 p-4 ">
-			<div className="mx-0 md:mx-[3rem]">
-				<div className="mx-auto  flex flex-col md:flex-row justify-between items-center">
+		<nav className="bg-darkpurple p-2">
+			<div className="mx-auto max-w-5xl">
+				<div className="flex flex-col sm:flex-row justify-between items-center">
 					<h1>
 						<Link
 							to="/"
-							className="text-lime-500 
-          text-2xl md:text-3xl font-bold italic"
+							className="text-brightwhite
+          text-2xl md:text-3xl font-bold hover:text-hotpink"
 						>
-							Kick⚽ff
+							Kick⚽ff <span className="text-sm">EPL</span>
 						</Link>
 					</h1>
 					<div className="flex flex-row justify-center gap-4 text-lime-500 ">
-						{Leagues.map((league) => (
-							<Link
-								key={league.id}
-								to={`/${league.id}`}
-								className=" text-xl md:text-2xl font-bold"
-								aria-label={league.name}
-							>
-								<span className="hidden md:block">{league.name}</span>
-								<span className="md:hidden">{league.nameShort}</span>
-							</Link>
-						))}
+						<Link
+							to={`/matches`}
+							className="text-brightwhite text-xl md:text-2xl font-bold hover:text-hotpink"
+							aria-label="matches"
+						>
+							Matches
+						</Link>
+						<Link
+							to={`/teams`}
+							className="text-brightwhite text-xl md:text-2xl font-bold hover:text-hotpink"
+							aria-label="teams"
+						>
+							Teams
+						</Link>
 					</div>
 				</div>
 			</div>
