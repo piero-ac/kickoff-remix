@@ -9,7 +9,7 @@ export default function MatchRow({ match }: { match: Match }) {
 	return (
 		<div
 			key={match.fixture.id}
-			className={`flex flex-col items-center lg:flex-row md:justify-between text-darkpurple pb-1 ${"border-b border-b-cyan"}`}
+			className="flex flex-col items-center lg:flex-row md:justify-between text-darkpurple pb-1 border-b border-b-cyan"
 			onClick={() => navigate(`/matches/${match.fixture.id}`)}
 		>
 			<div className="flex flex-row text-end">
