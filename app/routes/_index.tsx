@@ -6,7 +6,7 @@ import getLeagueStandings from "~/api/getLeagueStandings";
 import getMatchdates from "~/api/getMatchdates";
 import { getDate, getNextMatchdate } from "utils/datetime-functions";
 import Standings from "~/components/Standings";
-import MatchesOverviewTable from "~/components/MatchesOverviewTable";
+import MatchesOverviewTable from "~/components/MatchesOverviewTable/MatchesOverviewTable";
 
 export const meta: MetaFunction = () => {
 	return [
