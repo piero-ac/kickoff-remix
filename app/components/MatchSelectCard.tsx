@@ -1,4 +1,4 @@
-import { useNavigate } from "@remix-run/react";
+import { useNavigate, useLocation } from "@remix-run/react";
 import { convertDateToLocalTime } from "utils/datetime-functions";
 
 export default function MatchSelectCard({
@@ -9,11 +9,16 @@ export default function MatchSelectCard({
 	type: "upcoming" | "past" | "today";
 }) {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const matchId: string | undefined = location.pathname.split("/")[2];
 	const dateLocalTime = convertDateToLocalTime(match.fixture.date);
 	const date = `${dateLocalTime.day} ${dateLocalTime.month} ${dateLocalTime.year}`;
 	return (
 		<div
-			className="border-b border-b-cyan flex flex-row items-center min-h-[50px] hover:cyan-gradient hover:text-brightwhite font-semibold"
+			className={
+				`border-b border-b-cyan flex flex-row items-center min-h-[50px] hover:cyan-gradient hover:text-brightwhite font-semibold px-1 ` +
+				(matchId && Number(matchId) === match.fixture.id && "cyan-gradient")
+			}
 			onClick={() => navigate(`/matches/${match.fixture.id}`)}
 		>
 			<img
