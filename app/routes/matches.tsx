@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, Outlet } from "@remix-run/react";
 import getLeagueMatches from "~/api/getLeagueMatches";
 import MatchSelectButton from "~/components/MatchSelectButton";
 import { getDate } from "utils/datetime-functions";
@@ -93,9 +93,9 @@ export default function Matches() {
 						/>
 					</div>
 					{/* Matches to select*/}
-					<div className="rounded-sm bg-brightwhite grow overflow-scroll max-h-[460px] px-1">
+					<div className="rounded-sm bg-brightwhite grow overflow-scroll max-h-[460px]">
 						{displayedMatches.matches.length === 0 && (
-							<p className="text-slate-500 text-5xl font-semibold uppercase text-center flex items-center h-full">
+							<p className="text-slate-500 text-5xl font-semibold uppercase text-center flex items-center h-[460px]">
 								No matches available
 							</p>
 						)}
@@ -110,7 +110,9 @@ export default function Matches() {
 					</div>
 				</section>
 				{/* Match View  */}
-				<section className="border border-red-100 grow"></section>
+				<section className="border border-red-100 grow">
+					<Outlet />
+				</section>
 			</main>
 		</div>
 	);
