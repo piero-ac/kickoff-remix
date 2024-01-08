@@ -17,7 +17,9 @@ export default function MatchSelectCard({
 		<div
 			className={
 				`border-b border-b-cyan flex flex-row items-center min-h-[50px] hover:cyan-gradient hover:text-brightwhite font-semibold px-1 ` +
-				(matchId && Number(matchId) === match.fixture.id && "cyan-gradient")
+				(matchId &&
+					Number(matchId) === match.fixture.id &&
+					"cyan-gradient text-brightwhite ")
 			}
 			onClick={() => navigate(`/matches/${match.fixture.id}`)}
 		>
@@ -30,6 +32,7 @@ export default function MatchSelectCard({
 			/>
 			<div className="w-[100px] text-center text-sm">
 				<p>{date}</p>
+				{type === "upcoming" && <p>{dateLocalTime.time}</p>}
 				{type !== "upcoming" && (
 					<p>
 						{match.goals.home}-{match.goals.away}

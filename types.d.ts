@@ -1,6 +1,6 @@
 interface Fixture {
 	id: number;
-	referee: string;
+	referee: string | null;
 	timezone: string;
 	date: string;
 	timestamp: number;
@@ -131,4 +131,38 @@ interface TeamStanding {
 	};
 	update: string;
 	_id: string;
+}
+
+interface PlayerLineupInfo {
+	id: number;
+	name: string;
+	number: number;
+	pos: string;
+	grid: string | null;
+}
+
+interface Lineup {
+	coach: {
+		id: number;
+		name: string;
+		photo: string;
+	};
+	id: number;
+	name: string;
+	logo: string;
+	colors: {
+		player: {
+			primary: string;
+			number: string;
+			border: string;
+		};
+		goalkeeper: {
+			primary: string;
+			number: string;
+			border: string;
+		};
+	};
+	formation: string;
+	startXI: PlayerLineupInfo[];
+	substitutes: PlayerLineupInfo[];
 }
