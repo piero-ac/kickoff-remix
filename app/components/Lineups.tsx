@@ -28,7 +28,7 @@ export default function Lineups({ lineups }: { lineups: Lineup[] }) {
 					{awayName.toUpperCase()}
 				</button>
 			</div>
-			<section>
+			<section className="mt-1 px-5">
 				{displayedLineup === "home" ? (
 					<TeamLineup startXI={home.startXI} substitutes={home.substitutes} />
 				) : (
