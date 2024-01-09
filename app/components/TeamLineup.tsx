@@ -5,43 +5,59 @@ export default function TeamLineup({
 	startXI: PlayerLineupInfo[];
 	substitutes: PlayerLineupInfo[];
 }) {
+	const goalkeeper = startXI.filter((player) => player.pos === "G");
+	const defenders = startXI.filter((player) => player.pos === "D");
+	const midfielders = startXI.filter((player) => player.pos === "M");
+	const forwards = startXI.filter((player) => player.pos === "F");
 	return (
-		<div className="flex flex-row gap-1">
-			<div className="w-[300px]">
-				<div className="border-b border-b-darkpurple">
+		<div className="flex flex-row gap-1 justify-center">
+			<div className="w-1/2">
+				<div>
 					<h3 className="text-darkpurple text-xl font-semibold">Goalkeeper</h3>
-					{startXI
-						.filter((player) => player.pos === "G")
-						.map((player) => (
-							<p key={player.id}>{`${player.number} ${player.name}`}</p>
-						))}
+					{goalkeeper.map((player) => (
+						<div key={player.id} className="flex flex-row gap-4">
+							<p className="w-[30px]">{player.number}</p>
+							<p>{player.name}</p>
+						</div>
+					))}
 				</div>
 				<div>
-					<h3>Defenders</h3>
-					{startXI
-						.filter((player) => player.pos === "D")
-						.map((player) => (
-							<p key={player.id}>{`${player.number} ${player.name}`}</p>
-						))}
+					<h3 className="text-darkpurple text-xl font-semibold">Defenders</h3>
+					{defenders.map((player) => (
+						<div key={player.id} className="flex flex-row gap-4">
+							<p className="w-[30px]">{player.number}</p>
+							<p>{player.name}</p>
+						</div>
+					))}
 				</div>
 				<div>
-					<h3>Midfielders</h3>
-					{startXI
-						.filter((player) => player.pos === "M")
-						.map((player) => (
-							<p key={player.id}>{`${player.number} ${player.name}`}</p>
-						))}
+					<h3 className="text-darkpurple text-xl font-semibold">Midfielders</h3>
+					{midfielders.map((player) => (
+						<div key={player.id} className="flex flex-row gap-4">
+							<p className="w-[30px]">{player.number}</p>
+							<p>{player.name}</p>
+						</div>
+					))}
 				</div>
 				<div>
-					<h3>Forwards</h3>
-					{startXI
-						.filter((player) => player.pos === "F")
-						.map((player) => (
-							<p key={player.id}>{`${player.number} ${player.name}`}</p>
-						))}
+					<h3 className="text-darkpurple text-xl font-semibold">Forwards</h3>
+					{forwards.map((player) => (
+						<div key={player.id} className="flex flex-row gap-4">
+							<p className="w-[30px]">{player.number}</p>
+							<p>{player.name}</p>
+						</div>
+					))}
 				</div>
 			</div>
-			<div className="grow">player picture</div>
+			<div className="grow">
+				<h3 className="text-darkpurple text-xl font-semibold">Substitutes</h3>
+				{substitutes.map((player) => (
+					<div key={player.id} className="flex flex-row gap-4">
+						<p className="w-[30px]">{player.number}</p>
+						<p>{player.name}</p>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 }
