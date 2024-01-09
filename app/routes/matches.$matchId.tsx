@@ -4,6 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import getMatchInfo from "~/api/getMatchInfo";
 import getMatchLineup from "~/api/getMatchLineup";
 import { convertDateToLocalTime } from "utils/datetime-functions";
+import Lineups from "~/components/Lineups";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const matchId = params.matchId;
@@ -11,15 +12,14 @@ export async function loader({ params }: LoaderFunctionArgs) {
 		throw new Response("Missing Match Id", { status: 400 });
 	}
 	const match = await getMatchInfo(matchId);
-	const lineup = await getMatchLineup(matchId);
-	return json({ match, lineup });
+	const lineups = await getMatchLineup(matchId);
+	return json({ match, lineups });
 }
 
 export default function MatchInformation() {
-	const { match, lineup } = useLoaderData<typeof loader>();
+	const { match, lineups } = useLoaderData<typeof loader>();
 	const dateLocalTime = convertDateToLocalTime(match.fixture.date);
 	const date = `${dateLocalTime.day} ${dateLocalTime.month} ${dateLocalTime.year}`;
-	const [home, away] = lineup;
 
 	return (
 		<div className="bg-brightwhite h-full p-1">
@@ -79,8 +79,7 @@ export default function MatchInformation() {
 				</div>
 			</section>
 			<section className="mt-1">
-				<h1>Lineups</h1>
-				{home.coach.name}
+				<Lineups lineups={lineups} />
 			</section>
 		</div>
 	);
