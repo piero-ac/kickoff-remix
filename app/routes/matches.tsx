@@ -51,14 +51,14 @@ export default function Matches() {
 
 	return (
 		<div className="my-1">
-			<header className="mt-5 mb-5 h-[150px] md:h-[200px] cyan-gradient flex flex-row justify-center items-center">
+			<header className="mt-5 mb-5 h-[100px] md:h-[200px] cyan-gradient flex flex-row justify-center items-center">
 				<h1 className=" text-brightwhite font-bold text-5xl md:text-7xl">
 					Matches
 				</h1>
 			</header>
-			<main className="max-w-[1024px] mx-auto flex flex-row gap-2">
+			<main className="max-w-[1024px] mx-auto flex flex-col md:flex-row gap-2 items-center md:items-start">
 				{/* Match Selection */}
-				<section className="w-[380px] flex flex-col shadow-lg">
+				<section className="w-[350px] h-[300px] md:h-auto sm:w-[416px] md:w-[375px] flex flex-col shadow-lg">
 					{/* Options to filter matches */}
 					<div className="w-full flex flex-row justify-between bg-darkpurple">
 						<MatchSelectButton
@@ -110,7 +110,7 @@ export default function Matches() {
 					</div>
 				</section>
 				{/* Match View  */}
-				<section className="grow shadow-lg">
+				<section className="w-[350px] sm:w-[416px] md:w-auto grow shadow-lg">
 					<Outlet />
 				</section>
 			</main>
