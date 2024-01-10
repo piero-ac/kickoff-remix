@@ -45,7 +45,7 @@ export default function MatchInformation() {
 					{match.fixture.venue.name}
 				</div>
 				{match.fixture.referee && (
-					<div className="flex flex-row items-center gap-1">
+					<div className="hidden lg:flex flex-row items-center gap-1">
 						<img src="/img/user-2-line.svg" alt="Referee Icon" width="15px" />{" "}
 						{match.fixture.referee}
 					</div>
@@ -56,16 +56,16 @@ export default function MatchInformation() {
 					<img
 						src={match.teams.home.logo}
 						alt={`${match.teams.home.name}'s Logo`}
-						width="100px"
+						className="w-[60px] sm:w-[80px] md:w-[100px]"
 					/>
 
 					<p>{match.teams.home.name}</p>
 				</div>
-				<div className="bg-darkpurple rounded-lg text-white min-w-[200px] flex flex-col items-center justify-center">
-					<p className="text-5xl font-bold">
+				<div className="bg-darkpurple rounded-lg text-white w-[150px] sm:w-[160px] flex flex-col items-center justify-center">
+					<p className="text-3xl sm:text-4xl font-bold">
 						{match.score.fulltime.home} - {match.score.fulltime.away}
 					</p>
-					<p className="">
+					<p className="text-sm sm:text-lg">
 						Halftime: {match.score.halftime.home} - {match.score.halftime.away}
 					</p>
 				</div>
@@ -73,7 +73,7 @@ export default function MatchInformation() {
 					<img
 						src={match.teams.away.logo}
 						alt={`${match.teams.away.name}'s Logo`}
-						width="100px"
+						className="w-[60px] sm:w-[80px] md:w-[100px]"
 					/>
 					<p>{match.teams.away.name}</p>
 				</div>
