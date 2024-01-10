@@ -56,9 +56,9 @@ export default function Matches() {
 					Matches
 				</h1>
 			</header>
-			<main className="max-w-[1024px] mx-auto flex flex-col md:flex-row gap-2 items-center md:items-start">
+			<main className="max-w-[1024px] mx-auto flex flex-col md:flex-row gap-2 md:gap-0 items-center md:items-start px-1">
 				{/* Match Selection */}
-				<section className="w-[350px] h-[300px] md:h-auto sm:w-[416px] md:w-[375px] flex flex-col shadow-lg">
+				<section className="w-[350px] h-[300px] md:h-[600px] sm:w-[416px] md:w-[375px] flex flex-col shadow-lg">
 					{/* Options to filter matches */}
 					<div className="w-full flex flex-row justify-between bg-darkpurple">
 						<MatchSelectButton
@@ -93,7 +93,7 @@ export default function Matches() {
 						/>
 					</div>
 					{/* Matches to select*/}
-					<div className="rounded-sm bg-brightwhite grow overflow-scroll max-h-[600px]">
+					<div className="rounded-sm bg-brightwhite grow overflow-scroll">
 						{displayedMatches.matches.length === 0 && (
 							<p className="text-slate-500 text-5xl font-semibold uppercase text-center flex items-center h-[460px]">
 								No matches available
@@ -110,7 +110,7 @@ export default function Matches() {
 					</div>
 				</section>
 				{/* Match View  */}
-				<section className="w-[350px] sm:w-[416px] md:w-auto grow shadow-lg">
+				<section className="w-[350px] sm:w-[416px] md:w-auto grow shadow-lg md:h-[600px]">
 					<Outlet />
 				</section>
 			</main>
