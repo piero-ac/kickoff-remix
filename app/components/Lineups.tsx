@@ -16,14 +16,18 @@ export default function Lineups({ lineups }: { lineups: Lineup[] }) {
 				<button
 					onClick={() => setDisplayedLineup("home")}
 					disabled={displayedLineup === "home"}
-					className={`w-[100px] p-1 rounded-s-md font-bold bg-cyan text-darkpurple`}
+					className={`w-[100px] p-1 rounded-s-md font-bold bg-cyan text-darkpurple ${
+						displayedLineup === "home" && "underline"
+					}`}
 				>
 					{homeName.toUpperCase()}
 				</button>
 				<button
 					onClick={() => setDisplayedLineup("away")}
 					disabled={displayedLineup === "away"}
-					className={`w-[100px] p-1 rounded-e-md font-bold bg-hotpink text-darkpurple`}
+					className={`w-[100px] p-1 rounded-e-md font-bold bg-hotpink text-darkpurple ${
+						displayedLineup === "away" && "underline"
+					}`}
 				>
 					{awayName.toUpperCase()}
 				</button>

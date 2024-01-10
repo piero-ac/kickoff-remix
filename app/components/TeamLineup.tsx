@@ -10,7 +10,7 @@ export default function TeamLineup({
 	const midfielders = startXI.filter((player) => player.pos === "M");
 	const forwards = startXI.filter((player) => player.pos === "F");
 	return (
-		<div className="flex flex-row gap-1 justify-center">
+		<div className="flex flex-row gap-3 sm:gap-1 justify-center">
 			<div className="w-1/2">
 				<div>
 					<h3 className="text-darkpurple text-xl font-semibold">Goalkeeper</h3>
