@@ -189,3 +189,10 @@ interface Event {
 	detail: string | null;
 	comments: string | null;
 }
+
+interface Statistic {
+	id: number;
+	logo: string;
+	name: string;
+	statistics: [{ type: string; value: string | number | null }];
+}
