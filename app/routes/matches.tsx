@@ -58,7 +58,7 @@ export default function Matches() {
 			</header>
 			<main className="max-w-[1024px] mx-auto flex flex-col md:flex-row gap-2 md:gap-0 items-center md:items-start px-1">
 				{/* Match Selection */}
-				<section className="w-[350px] h-[300px] md:h-[600px] sm:w-[416px] md:w-[375px] flex flex-col shadow-lg">
+				<section className="w-[350px] h-[300px] md:h-[630px] sm:w-[416px] md:w-[375px] flex flex-col shadow-lg">
 					{/* Options to filter matches */}
 					<div className="w-full flex flex-row justify-between bg-darkpurple">
 						<MatchSelectButton
@@ -110,7 +110,7 @@ export default function Matches() {
 					</div>
 				</section>
 				{/* Match View  */}
-				<section className="w-[350px] sm:w-[416px] md:w-auto grow shadow-lg md:h-[600px]">
+				<section className="w-[350px] sm:w-[416px] md:w-auto grow shadow-lg md:h-[630px]">
 					<Outlet />
 				</section>
 			</main>
