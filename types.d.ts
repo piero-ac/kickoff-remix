@@ -167,7 +167,7 @@ interface Lineup {
 	substitutes: PlayerLineupInfo[];
 }
 
-interface Event {
+interface MatchEvent {
 	time: {
 		elapsed: number;
 		extra: number | null;
@@ -188,6 +188,7 @@ interface Event {
 	eventType: string;
 	detail: string | null;
 	comments: string | null;
+	_id: string;
 }
 
 interface Statistic {
