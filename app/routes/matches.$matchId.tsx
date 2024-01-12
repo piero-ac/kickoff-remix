@@ -1,10 +1,8 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, NavLink, Outlet } from "@remix-run/react";
 import getMatchInfo from "~/api/getMatchInfo";
-import getMatchLineup from "~/api/getMatchLineup";
 import { convertDateToLocalTime } from "utils/datetime-functions";
-import Lineups from "~/components/Lineups";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const matchId = params.matchId;
@@ -12,12 +10,12 @@ export async function loader({ params }: LoaderFunctionArgs) {
 		throw new Response("Missing Match Id", { status: 400 });
 	}
 	const match = await getMatchInfo(matchId);
-	const lineups = await getMatchLineup(matchId);
-	return json({ match, lineups });
+
+	return json({ match });
 }
 
 export default function MatchInformation() {
-	const { match, lineups } = useLoaderData<typeof loader>();
+	const { match } = useLoaderData<typeof loader>();
 	const dateLocalTime = convertDateToLocalTime(match.fixture.date);
 	const date = `${dateLocalTime.day} ${dateLocalTime.month} ${dateLocalTime.year}`;
 
@@ -78,8 +76,20 @@ export default function MatchInformation() {
 					<p>{match.teams.away.name}</p>
 				</div>
 			</section>
+			<section className="flex flex-row justify-center gap-3">
+				<NavLink
+					to="lineups"
+					className={({ isActive, isPending }) =>
+						isActive ? "underline uppercase" : ""
+					}
+				>
+					Lineups
+				</NavLink>
+				<NavLink to="events">Events</NavLink>
+				<NavLink to="statistics">Statistics</NavLink>
+			</section>
 			<section className="mt-1">
-				<Lineups lineups={lineups} />
+				<Outlet />
 			</section>
 		</div>
 	);

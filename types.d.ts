@@ -166,3 +166,33 @@ interface Lineup {
 	startXI: PlayerLineupInfo[];
 	substitutes: PlayerLineupInfo[];
 }
+
+interface Event {
+	time: {
+		elapsed: number;
+		extra: number | null;
+	};
+	team: {
+		id: number;
+		name: string;
+		logo: string;
+	};
+	player: {
+		id: number;
+		name: string;
+	};
+	assist: {
+		id: number;
+		name: string;
+	};
+	eventType: string;
+	detail: string | null;
+	comments: string | null;
+}
+
+interface Statistic {
+	id: number;
+	logo: string;
+	name: string;
+	statistics: [{ type: string; value: string | number | null }];
+}
