@@ -9,7 +9,7 @@ export default async function getMatchEvents(matchId: string) {
 			throw json({ message: "Could not fetch match events" }, { status: 500 });
 		}
 
-		const events: Event[] = await response.json();
+		const events: MatchEvent[] = await response.json();
 		return events;
 	} catch (error: any) {
 		const err = error as Error;

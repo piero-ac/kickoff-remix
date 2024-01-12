@@ -85,7 +85,14 @@ export default function MatchInformation() {
 				>
 					Lineups
 				</NavLink>
-				<NavLink to="events">Events</NavLink>
+				<NavLink
+					to="events"
+					className={({ isActive, isPending }) =>
+						isActive ? "underline uppercase" : ""
+					}
+				>
+					Events
+				</NavLink>
 				<NavLink to="statistics">Statistics</NavLink>
 			</section>
 			<section className="mt-1">
