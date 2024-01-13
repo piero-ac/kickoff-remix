@@ -13,7 +13,6 @@ export async function loader({ params }: LoaderFunctionArgs) {
 		throw new Response("Missing Match Id", { status: 400 });
 	}
 	const events: MatchEvent[] = await getMatchEvents(matchId);
-	console.log(events[0]);
 	return json({ events });
 }
 
