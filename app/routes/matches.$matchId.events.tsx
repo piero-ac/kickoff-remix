@@ -1,11 +1,16 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import {
+	useLoaderData,
+	useRouteError,
+	isRouteErrorResponse,
+} from "@remix-run/react";
 import getMatchEvents from "~/api/getMatchEvents";
 import CardEvent from "~/components/Events/CardEvent";
 import GoalEvent from "~/components/Events/GoalEvent";
 import SubstitutionEvent from "~/components/Events/SubstitutionEvent";
 import VarEvent from "~/components/Events/VarEvent";
+import ErrorCard from "~/components/MatchDataErrorCard";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const matchId = params.matchId;
@@ -45,4 +50,31 @@ export default function EventsPage() {
 			</table>
 		</div>
 	);
+}
+
+export function ErrorBoundary() {
+	const error = useRouteError();
+	if (isRouteErrorResponse(error)) {
+		return (
+			<ErrorCard
+				title="Events Not Available"
+				statusCode={error.status}
+				message={error.data.message}
+			/>
+		);
+	} else if (error instanceof Error) {
+		return (
+			<ErrorCard
+				title="Unexpected Error!"
+				message={`${error.name} - ${error.message}`}
+			/>
+		);
+	} else {
+		return (
+			<ErrorCard
+				title="Unexpected Error!"
+				message="An unexpected error occurred. Please try again later."
+			/>
+		);
+	}
 }
