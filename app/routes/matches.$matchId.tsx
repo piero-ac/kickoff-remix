@@ -49,7 +49,7 @@ export default function MatchInformation() {
 					</div>
 				)}
 			</header>
-			<section className="flex flex-row justify-between mt-3 p-1 border-b border-b-darkpurple">
+			<section className="flex flex-row justify-between mt-3 p-1">
 				<div className="flex flex-col items-center text-darkpurple font-bold grow">
 					<img
 						src={match.teams.home.logo}
@@ -76,11 +76,11 @@ export default function MatchInformation() {
 					<p>{match.teams.away.name}</p>
 				</div>
 			</section>
-			<section className="flex flex-row justify-center gap-3">
+			<section className="flex flex-row justify-center gap-3 bg-limegreen">
 				<NavLink
 					to="lineups"
 					className={({ isActive, isPending }) =>
-						isActive ? "underline uppercase" : ""
+						isActive ? "font-semibold uppercase" : ""
 					}
 				>
 					Lineups
@@ -88,12 +88,19 @@ export default function MatchInformation() {
 				<NavLink
 					to="events"
 					className={({ isActive, isPending }) =>
-						isActive ? "underline uppercase" : ""
+						isActive ? "font-semibold uppercase" : ""
 					}
 				>
 					Events
 				</NavLink>
-				<NavLink to="statistics">Statistics</NavLink>
+				<NavLink
+					to="statistics"
+					className={({ isActive, isPending }) =>
+						isActive ? "font-semibold uppercase" : ""
+					}
+				>
+					Stats
+				</NavLink>
 			</section>
 			<section className="mt-1">
 				<Outlet />
