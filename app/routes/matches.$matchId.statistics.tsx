@@ -14,5 +14,26 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 export default function LineupPage() {
 	const { statistics } = useLoaderData<typeof loader>();
-	return <div>Statistics</div>;
+	const [home, away] = statistics;
+	return (
+		<div className="overflow-scroll max-h-[390px]">
+			<table className="table-auto text-center w-full">
+				<tbody>
+					{home.statistics.map((stat, index) => {
+						return (
+							<>
+								<tr>
+									<th colSpan={2}>{stat.type}</th>
+								</tr>
+								<tr>
+									<td>{stat.value || 0}</td> {/*Home Value */}
+									<td>{away.statistics[index].value || 0}</td> {/*Home Value */}
+								</tr>
+							</>
+						);
+					})}
+				</tbody>
+			</table>
+		</div>
+	);
 }
