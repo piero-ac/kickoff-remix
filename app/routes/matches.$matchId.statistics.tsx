@@ -1,19 +1,25 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import {
+	isRouteErrorResponse,
+	useLoaderData,
+	useRouteError,
+} from "@remix-run/react";
 import getMatchStatistics from "~/api/getMatchStatistics";
 import MatchStat from "~/components/MatchStat";
+import ErrorCard from "~/components/MatchDataErrorCard";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const matchId = params.matchId;
 	if (!matchId) {
 		throw new Response("Missing Match Id", { status: 400 });
 	}
+
 	const statistics = await getMatchStatistics(matchId);
 	return json({ statistics });
 }
 
-export default function LineupPage() {
+export default function StatisticsPage() {
 	const { statistics } = useLoaderData<typeof loader>();
 	const [home, away] = statistics;
 	return (
@@ -32,4 +38,39 @@ export default function LineupPage() {
 			</table>
 		</div>
 	);
+}
+
+export function ErrorBoundary() {
+	const error = useRouteError();
+	if (isRouteErrorResponse(error)) {
+		if (error.status === 404) {
+			return (
+				<ErrorCard
+					title="Statistics Not Available"
+					message={error.data.message}
+				/>
+			);
+		} else if (error.status === 500) {
+			return (
+				<ErrorCard
+					title="Statistics Not Available"
+					message={error.data.message}
+				/>
+			);
+		}
+	} else if (error instanceof Error) {
+		return (
+			<ErrorCard
+				title="Unexpected Error!"
+				message={`${error.name} - ${error.message}`}
+			/>
+		);
+	} else {
+		return (
+			<ErrorCard
+				title="Unexpected Error!"
+				message="An unexpected error occurred. Please try again later."
+			/>
+		);
+	}
 }
