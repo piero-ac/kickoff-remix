@@ -34,7 +34,7 @@ export default function MatchInformation() {
 					<img src="/img/time-line.svg" alt="Clock Icon" width="15px" />
 					{dateLocalTime.time}
 				</div>
-				<div className="flex flex-row items-center gap-1">
+				<div className="flex flex-row items-center gap-1 truncate">
 					<img
 						src="/img/treasure-map-line.svg"
 						alt="Venue Location Icon"
@@ -102,7 +102,7 @@ export default function MatchInformation() {
 					Stats
 				</NavLink>
 			</section>
-			<section className="mt-1">
+			<section>
 				<Outlet />
 			</section>
 		</div>
