@@ -43,21 +43,13 @@ export default function StatisticsPage() {
 export function ErrorBoundary() {
 	const error = useRouteError();
 	if (isRouteErrorResponse(error)) {
-		if (error.status === 404) {
-			return (
-				<ErrorCard
-					title="Statistics Not Available"
-					message={error.data.message}
-				/>
-			);
-		} else if (error.status === 500) {
-			return (
-				<ErrorCard
-					title="Statistics Not Available"
-					message={error.data.message}
-				/>
-			);
-		}
+		return (
+			<ErrorCard
+				title="Statistics Not Available"
+				statusCode={error.status}
+				message={error.data.message}
+			/>
+		);
 	} else if (error instanceof Error) {
 		return (
 			<ErrorCard
