@@ -20,7 +20,7 @@ export default function EventsPage() {
 	const { events } = useLoaderData<typeof loader>();
 
 	return (
-		<div className="overflow-scroll max-h-[390px]">
+		<div className="overflow-y-scroll max-h-[390px]">
 			<table className="table-auto text-center w-full">
 				<thead className="bg-darkpurple text-brightwhite ">
 					<th>Time</th>
