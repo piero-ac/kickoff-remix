@@ -49,7 +49,7 @@ export default function MatchInformation() {
 					</div>
 				)}
 			</header>
-			<section className="flex flex-row justify-between mt-3 p-1">
+			<section className="flex flex-row justify-between mt-3 p-1 cyan-gradient">
 				<div className="flex flex-col items-center text-darkpurple font-bold grow">
 					<img
 						src={match.teams.home.logo}
