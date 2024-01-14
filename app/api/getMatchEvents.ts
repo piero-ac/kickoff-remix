@@ -6,7 +6,7 @@ export default async function getMatchEvents(matchId: string) {
 		const response = await fetch(url);
 
 		if (!response.ok) {
-			throw json({ message: "Could not fetch match events" }, { status: 500 });
+			throw new Error(`Failed to fetch events (${response.status})`);
 		}
 
 		const events: MatchEvent[] = await response.json();
@@ -14,11 +14,12 @@ export default async function getMatchEvents(matchId: string) {
 	} catch (error: any) {
 		const err = error as Error;
 		console.error(err.message);
-		throw json(
-			{
-				message: err.message,
-			},
-			{ status: 500 }
-		);
+
+		// Handle different error scenarios and throw the appropriate JSON response
+		if (err.message === "Failed to fetch events (404)") {
+			throw json({ message: "Please check back later." }, { status: 404 });
+		} else {
+			throw json({ message: err.message }, { status: 500 });
+		}
 	}
 }
