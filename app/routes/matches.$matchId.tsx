@@ -20,7 +20,7 @@ export default function MatchInformation() {
 	const date = `${dateLocalTime.day} ${dateLocalTime.month} ${dateLocalTime.year}`;
 
 	return (
-		<div className="bg-brightwhite h-full p-1">
+		<div className="bg-brightwhite h-full p-1 flex flex-col">
 			<header className="flex flew-row shadow-sm text-sm justify-evenly text-darkpurple">
 				<div className="flex flex-row items-center gap-1">
 					<img
@@ -50,7 +50,7 @@ export default function MatchInformation() {
 				)}
 			</header>
 			<section className="flex flex-row justify-between mt-3 p-1 cyan-gradient">
-				<div className="flex flex-col items-center text-darkpurple font-bold grow">
+				<div className="flex flex-col items-center text-brightwhite font-semibold grow">
 					<img
 						src={match.teams.home.logo}
 						alt={`${match.teams.home.name}'s Logo`}
@@ -67,7 +67,7 @@ export default function MatchInformation() {
 						Halftime: {match.score.halftime.home} - {match.score.halftime.away}
 					</p>
 				</div>
-				<div className="flex flex-col items-center text-darkpurple font-bold grow">
+				<div className="flex flex-col items-center text-brightwhite font-semibold grow">
 					<img
 						src={match.teams.away.logo}
 						alt={`${match.teams.away.name}'s Logo`}
@@ -102,7 +102,7 @@ export default function MatchInformation() {
 					Stats
 				</NavLink>
 			</section>
-			<section>
+			<section className="grow">
 				<Outlet />
 			</section>
 		</div>
