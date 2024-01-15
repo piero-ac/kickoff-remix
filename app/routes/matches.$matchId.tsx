@@ -4,7 +4,7 @@ import { useLoaderData, NavLink, Outlet } from "@remix-run/react";
 import getMatchInfo from "~/api/getMatchInfo";
 import { convertDateToLocalTime } from "utils/datetime-functions";
 import MatchDetailsHeader from "~/components/MatchPage/MatchDetailsHeader";
-import MatchHero from "~/components/MatchPage/MatchHero";
+import MatchDetailsHero from "~/components/MatchPage/MatchDetailsHero";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const matchId = params.matchId;
@@ -32,7 +32,7 @@ export default function MatchInformation() {
 				/>
 			</header>
 			<section className="flex flex-row justify-between mt-3 p-1 cyan-gradient">
-				<MatchHero
+				<MatchDetailsHero
 					home={match.teams.home}
 					away={match.teams.away}
 					score={match.score}

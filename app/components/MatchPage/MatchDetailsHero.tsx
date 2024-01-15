@@ -1,4 +1,4 @@
-export default function MatchHero({
+export default function MatchDetailsHero({
 	home,
 	away,
 	score,
