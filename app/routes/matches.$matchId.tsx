@@ -4,6 +4,7 @@ import { useLoaderData, NavLink, Outlet } from "@remix-run/react";
 import getMatchInfo from "~/api/getMatchInfo";
 import { convertDateToLocalTime } from "utils/datetime-functions";
 import MatchDetailsHeader from "~/components/MatchPage/MatchDetailsHeader";
+import MatchHero from "~/components/MatchPage/MatchHero";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const matchId = params.matchId;
@@ -31,31 +32,11 @@ export default function MatchInformation() {
 				/>
 			</header>
 			<section className="flex flex-row justify-between mt-3 p-1 cyan-gradient">
-				<div className="flex flex-col items-center text-brightwhite font-semibold grow">
-					<img
-						src={match.teams.home.logo}
-						alt={`${match.teams.home.name}'s Logo`}
-						className="w-[60px] sm:w-[80px] md:w-[100px]"
-					/>
-
-					<p>{match.teams.home.name}</p>
-				</div>
-				<div className="bg-darkpurple rounded-lg text-white w-[150px] sm:w-[160px] flex flex-col items-center justify-center">
-					<p className="text-3xl sm:text-4xl font-bold">
-						{match.score.fulltime.home} - {match.score.fulltime.away}
-					</p>
-					<p className="text-sm sm:text-lg">
-						Halftime: {match.score.halftime.home} - {match.score.halftime.away}
-					</p>
-				</div>
-				<div className="flex flex-col items-center text-brightwhite font-semibold grow">
-					<img
-						src={match.teams.away.logo}
-						alt={`${match.teams.away.name}'s Logo`}
-						className="w-[60px] sm:w-[80px] md:w-[100px]"
-					/>
-					<p>{match.teams.away.name}</p>
-				</div>
+				<MatchHero
+					home={match.teams.home}
+					away={match.teams.away}
+					score={match.score}
+				/>
 			</section>
 			<section className="flex flex-row justify-center gap-3 bg-limegreen">
 				<NavLink
