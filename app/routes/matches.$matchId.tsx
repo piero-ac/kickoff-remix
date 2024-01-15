@@ -34,6 +34,7 @@ export default function MatchInformation() {
 			</header>
 			<section className="flex flex-row justify-between mt-3 p-1 cyan-gradient">
 				<MatchDetailsHero
+					fixtureStatus={match.fixture.status.short}
 					home={match.teams.home}
 					away={match.teams.away}
 					score={match.score}
