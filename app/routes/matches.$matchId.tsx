@@ -1,10 +1,11 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData, NavLink, Outlet } from "@remix-run/react";
+import { useLoaderData, Outlet } from "@remix-run/react";
 import getMatchInfo from "~/api/getMatchInfo";
 import { convertDateToLocalTime } from "utils/datetime-functions";
 import MatchDetailsHeader from "~/components/MatchPage/MatchDetailsHeader";
 import MatchDetailsHero from "~/components/MatchPage/MatchDetailsHero";
+import MatchDetailsNavigation from "~/components/MatchPage/MatchDetailsNavigation";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const matchId = params.matchId;
@@ -39,30 +40,7 @@ export default function MatchInformation() {
 				/>
 			</section>
 			<section className="flex flex-row justify-center gap-3 bg-limegreen">
-				<NavLink
-					to="lineups"
-					className={({ isActive, isPending }) =>
-						isActive ? "font-semibold uppercase" : ""
-					}
-				>
-					Lineups
-				</NavLink>
-				<NavLink
-					to="events"
-					className={({ isActive, isPending }) =>
-						isActive ? "font-semibold uppercase" : ""
-					}
-				>
-					Events
-				</NavLink>
-				<NavLink
-					to="statistics"
-					className={({ isActive, isPending }) =>
-						isActive ? "font-semibold uppercase" : ""
-					}
-				>
-					Stats
-				</NavLink>
+				<MatchDetailsNavigation />
 			</section>
 			<section className="grow">
 				<Outlet />
