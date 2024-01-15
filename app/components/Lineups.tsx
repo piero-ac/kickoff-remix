@@ -12,7 +12,7 @@ export default function Lineups({ lineups }: { lineups: Lineup[] }) {
 
 	return (
 		<>
-			<div className="flex flex-row justify-center text-xl ">
+			<div className="flex flex-row justify-center text-xl mt-1 ">
 				<button
 					onClick={() => setDisplayedLineup("home")}
 					disabled={displayedLineup === "home"}
