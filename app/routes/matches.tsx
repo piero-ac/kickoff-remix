@@ -11,6 +11,7 @@ import { getDate } from "utils/datetime-functions";
 import { useState } from "react";
 import MatchSelectCard from "~/components/MatchSelectCard";
 import MatchesHeader from "~/components/MatchesPage/MatchesHeader";
+import MatchesError from "~/components/MatchesPage/MatchesError";
 
 export const loader = async () => {
 	const matches: Match[] = await getLeagueMatches("39", "2023");
@@ -95,7 +96,7 @@ export default function Matches() {
 						/>
 					</div>
 					{/* Matches to select*/}
-					<div className="rounded-sm bg-brightwhite grow overflow-scroll">
+					<div className="rounded-sm bg-brightwhite grow overflow-y-scroll">
 						{displayedMatches.matches.length === 0 && (
 							<p className="text-slate-500 text-5xl font-semibold uppercase text-center flex items-center h-[460px]">
 								No matches available
@@ -123,13 +124,15 @@ export default function Matches() {
 export function ErrorBoundary() {
 	const error = useRouteError();
 	if (isRouteErrorResponse(error)) {
-		return (
-			<div className="my-1">
-				<MatchesHeader />
-				Server is down.
-			</div>
-		);
-	} else {
-		return <div>Unexpected Error!</div>;
+		if (error.status === 400) {
+			return (
+				<MatchesError title={error.data.title} message={error.data.message} />
+			);
+		} else {
+			return (
+				<MatchesError title="Server is down!" message="Check back later." />
+			);
+		}
 	}
+	return <MatchesError title="Unexpected Error!" message="Check back later." />;
 }
