@@ -1,10 +1,17 @@
 import { json } from "@remix-run/node";
-import { useLoaderData, Outlet } from "@remix-run/react";
+import {
+	useLoaderData,
+	Outlet,
+	useRouteError,
+	isRouteErrorResponse,
+} from "@remix-run/react";
 import getLeagueMatches from "~/api/getLeagueMatches";
 import MatchSelectButton from "~/components/MatchSelectButton";
 import { getDate } from "utils/datetime-functions";
 import { useState } from "react";
 import MatchSelectCard from "~/components/MatchSelectCard";
+import MatchesHeader from "~/components/MatchesPage/MatchesHeader";
+import MatchesError from "~/components/MatchesPage/MatchesError";
 
 export const loader = async () => {
 	const matches: Match[] = await getLeagueMatches("39", "2023");
@@ -51,11 +58,7 @@ export default function Matches() {
 
 	return (
 		<div className="my-1">
-			<header className="mt-5 mb-5 h-[100px] md:h-[200px] cyan-gradient flex flex-row justify-center items-center">
-				<h1 className=" text-brightwhite font-bold text-5xl md:text-7xl">
-					Matches
-				</h1>
-			</header>
+			<MatchesHeader />
 			<main className="max-w-[1024px] mx-auto flex flex-col md:flex-row gap-2 md:gap-0 items-center md:items-start px-1">
 				{/* Match Selection */}
 				<section className="w-[350px] h-[300px] md:h-[630px] sm:w-[416px] md:w-[375px] flex flex-col shadow-lg">
@@ -93,7 +96,7 @@ export default function Matches() {
 						/>
 					</div>
 					{/* Matches to select*/}
-					<div className="rounded-sm bg-brightwhite grow overflow-scroll">
+					<div className="rounded-sm bg-brightwhite grow overflow-y-scroll">
 						{displayedMatches.matches.length === 0 && (
 							<p className="text-slate-500 text-5xl font-semibold uppercase text-center flex items-center h-[460px]">
 								No matches available
@@ -116,4 +119,20 @@ export default function Matches() {
 			</main>
 		</div>
 	);
+}
+
+export function ErrorBoundary() {
+	const error = useRouteError();
+	if (isRouteErrorResponse(error)) {
+		if (error.status === 400) {
+			return (
+				<MatchesError title={error.data.title} message={error.data.message} />
+			);
+		} else {
+			return (
+				<MatchesError title="Server is down!" message="Check back later." />
+			);
+		}
+	}
+	return <MatchesError title="Unexpected Error!" message="Check back later." />;
 }
