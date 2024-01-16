@@ -4,8 +4,8 @@ export default function MatchSelectButton({
 	onClick,
 }: {
 	text: string;
-	selected: boolean;
-	onClick: () => void;
+	selected?: boolean;
+	onClick?: () => void;
 }) {
 	return (
 		<button
