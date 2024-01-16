@@ -1,6 +1,11 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData, Outlet } from "@remix-run/react";
+import {
+	useLoaderData,
+	Outlet,
+	useRouteError,
+	isRouteErrorResponse,
+} from "@remix-run/react";
 import getMatchInfo from "~/api/getMatchInfo";
 import { convertDateToLocalTime } from "utils/datetime-functions";
 import MatchDetailsHeader from "~/components/MatchPage/MatchDetailsHeader";
@@ -48,4 +53,23 @@ export default function MatchInformation() {
 			</section>
 		</div>
 	);
+}
+
+export function ErrorBoundary() {
+	const error = useRouteError();
+	if (isRouteErrorResponse(error)) {
+		return (
+			<div className="cyan-gradient text-brightwhite flex flex-col items-center justify-center h-full">
+				<p className="text-3xl font-bold">{error.data.title}</p>
+				<p>{error.data.message}</p>
+			</div>
+		);
+	} else {
+		return (
+			<div className="cyan-gradient text-brightwhite flex flex-col items-center justify-center">
+				<p className="text-3xl font-bold">Unexpected Error!</p>
+				<p>Try again later.</p>
+			</div>
+		);
+	}
 }
