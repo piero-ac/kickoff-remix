@@ -1,5 +1,9 @@
 import { type MetaFunction } from "@remix-run/node";
-import { useLoaderData, useRouteError } from "@remix-run/react";
+import {
+	isRouteErrorResponse,
+	useLoaderData,
+	useRouteError,
+} from "@remix-run/react";
 import { json } from "@remix-run/node";
 import getTodaysMatches from "~/api/getTodaysMatches";
 import getLeagueStandings from "~/api/getLeagueStandings";
@@ -8,6 +12,7 @@ import { getDate, getNextMatchdate } from "utils/datetime-functions";
 import Standings from "~/components/Standings";
 import MatchesOverviewTable from "~/components/MatchesOverviewTable/MatchesOverviewTable";
 import HomeHeader from "~/components/HomePage/HomeHeader";
+import StandingsError from "~/components/HomePage/StandingsError";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -70,10 +75,44 @@ export default function Index() {
 
 export function ErrorBoundary() {
 	const error = useRouteError() as Error;
-	return (
-		<div>
-			<h1>Something went wrong!</h1>
-			{error.message}
-		</div>
-	);
+
+	if (isRouteErrorResponse(error)) {
+		if (error.status === 400) {
+			return (
+				<div className="my-1">
+					<HomeHeader />
+					<section className="flex flex-col-reverse sm:flex-row items-center justify-center max-w-5xl mx-auto gap-2 lg:gap-4 px-1">
+						<StandingsError
+							title={error.data.title}
+							message={error.data.message}
+						/>
+					</section>
+				</div>
+			);
+		} else {
+			return (
+				<div className="my-1">
+					<HomeHeader />
+					<section className="flex flex-col-reverse sm:flex-row items-center justify-center max-w-5xl mx-auto gap-2 lg:gap-4 px-1">
+						<StandingsError
+							title="Server is down!"
+							message="Check back later."
+						/>
+					</section>
+				</div>
+			);
+		}
+	} else {
+		return (
+			<div className="my-1">
+				<HomeHeader />
+				<section className="flex flex-col-reverse sm:flex-row items-center justify-center max-w-5xl mx-auto gap-2 lg:gap-4 px-1">
+					<StandingsError
+						title="Unexpected Error!"
+						message="Please check back later."
+					/>
+				</section>
+			</div>
+		);
+	}
 }
