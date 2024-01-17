@@ -7,6 +7,7 @@ import getMatchdates from "~/api/getMatchdates";
 import { getDate, getNextMatchdate } from "utils/datetime-functions";
 import Standings from "~/components/Standings";
 import MatchesOverviewTable from "~/components/MatchesOverviewTable/MatchesOverviewTable";
+import HomeHeader from "~/components/HomePage/HomeHeader";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -47,17 +48,7 @@ export default function Index() {
 
 	return (
 		<div className="my-1">
-			{/* Header */}
-			<header className="mt-5 mb-5 h-[150px] md:h-[200px] cyan-gradient flex flex-col sm:flex-row justify-center items-center">
-				<h1 className=" text-brightwhite font-bold text-5xl md:text-7xl ">
-					Premier League
-				</h1>
-				<img
-					src="/img/premierleague-logo.png"
-					className="h-[50px] w-[50px] md:h-[120px] md:w-[120px]"
-					alt="Premier League Logo"
-				/>
-			</header>
+			<HomeHeader />
 			<section className="flex flex-col-reverse sm:flex-row items-center justify-center max-w-5xl mx-auto gap-2 lg:gap-4 px-1">
 				{/* League Table */}
 				<section className="rounded-lg w-[300px] md:w-[400px]">
