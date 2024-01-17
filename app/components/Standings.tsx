@@ -10,14 +10,16 @@ export default function Standings({
 			</h2>
 			<table className="w-[300px] md:w-[385px] rounded-b-lg text-darkpurple">
 				<thead className="bg-brightwhite  text-sm border-b border-b-cyan">
-					<th>Pos</th>
-					<th>Team</th>
-					<th>P</th>
-					<th className="hidden md:table-cell">W</th>
-					<th className="hidden md:table-cell">D</th>
-					<th className="hidden md:table-cell">L</th>
-					<th>GD</th>
-					<th>Pts</th>
+					<tr>
+						<th>Pos</th>
+						<th>Team</th>
+						<th>P</th>
+						<th className="hidden md:table-cell">W</th>
+						<th className="hidden md:table-cell">D</th>
+						<th className="hidden md:table-cell">L</th>
+						<th>GD</th>
+						<th>Pts</th>
+					</tr>
 				</thead>
 				<tbody>
 					{standings.length > 0 ? (
@@ -45,7 +47,9 @@ export default function Standings({
 							</tr>
 						))
 					) : (
-						<tr>No standings available.</tr>
+						<tr className="text-center bg-brightwhite hover:bg-hotpink hover:text-brightwhite">
+							<td>No standings available.</td>
+						</tr>
 					)}
 				</tbody>
 			</table>
