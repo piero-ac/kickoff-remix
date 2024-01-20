@@ -1,4 +1,4 @@
-export default function LeagueInfo({ leagueInfo }: { leagueInfo: LeagueInfo }) {
+const LeagueInfo = ({ leagueInfo }: { leagueInfo: LeagueInfo }) => {
 	return (
 		<div className="flex flex-row items-center h-[75px] justify-between">
 			<h1 className="text-2xl md:text-4xl text-bold uppercase">
@@ -16,4 +16,6 @@ export default function LeagueInfo({ leagueInfo }: { leagueInfo: LeagueInfo }) {
 			)}
 		</div>
 	);
-}
+};
+
+export default LeagueInfo;

@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 
-export default function Navbar() {
+const Navbar = () => {
 	return (
 		<nav className="bg-darkpurple p-2">
 			<div className="mx-auto max-w-5xl">
@@ -34,4 +34,6 @@ export default function Navbar() {
 			</div>
 		</nav>
 	);
-}
+};
+
+export default Navbar;

@@ -1,7 +1,7 @@
 import { convertDateToLocalTime } from "utils/datetime-functions";
 // import PremierLeagueLogo from "~/img/premierleague-logo.png";
 
-export default function Match({ match, src }: { match: Match; src: string }) {
+const Match = ({ match, src }: { match: Match; src: string }) => {
 	const { time } = convertDateToLocalTime(match.fixture.date);
 
 	return (
@@ -15,4 +15,6 @@ export default function Match({ match, src }: { match: Match; src: string }) {
 			</p>
 		</div>
 	);
-}
+};
+
+export default Match;

@@ -1,4 +1,4 @@
-export default function ErrorCard({
+const ErrorCard = ({
 	title,
 	message,
 	statusCode,
@@ -6,7 +6,7 @@ export default function ErrorCard({
 	title: string;
 	message: string | null;
 	statusCode?: number;
-}) {
+}) => {
 	let messageByStatus =
 		statusCode === 404
 			? "Please check back later."
@@ -20,4 +20,6 @@ export default function ErrorCard({
 			<p>{messageByStatus}</p>
 		</div>
 	);
-}
+};
+
+export default ErrorCard;
