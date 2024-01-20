@@ -12,16 +12,16 @@ import SubstitutionEvent from "~/components/Events/SubstitutionEvent";
 import VarEvent from "~/components/Events/VarEvent";
 import ErrorCard from "~/components/MatchDataErrorCard";
 
-export async function loader({ params }: LoaderFunctionArgs) {
+const loader = async ({ params }: LoaderFunctionArgs) => {
 	const matchId = params.matchId;
 	if (!matchId) {
 		throw new Response("Missing Match Id", { status: 400 });
 	}
 	const events: MatchEvent[] = await getMatchEvents(matchId);
 	return json({ events });
-}
+};
 
-export default function EventsPage() {
+const EventsPage = () => {
 	const { events } = useLoaderData<typeof loader>();
 
 	return (
@@ -50,9 +50,9 @@ export default function EventsPage() {
 			</table>
 		</div>
 	);
-}
+};
 
-export function ErrorBoundary() {
+export const ErrorBoundary = () => {
 	const error = useRouteError();
 	if (isRouteErrorResponse(error)) {
 		return (
@@ -77,4 +77,6 @@ export function ErrorBoundary() {
 			/>
 		);
 	}
-}
+};
+
+export default EventsPage;

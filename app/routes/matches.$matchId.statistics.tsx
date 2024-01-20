@@ -9,7 +9,7 @@ import getMatchStatistics from "~/api/getMatchStatistics";
 import MatchStat from "~/components/MatchStat";
 import ErrorCard from "~/components/MatchDataErrorCard";
 
-export async function loader({ params }: LoaderFunctionArgs) {
+const loader = async ({ params }: LoaderFunctionArgs) => {
 	const matchId = params.matchId;
 	if (!matchId) {
 		throw new Response("Missing Match Id", { status: 400 });
@@ -17,9 +17,9 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 	const statistics = await getMatchStatistics(matchId);
 	return json({ statistics });
-}
+};
 
-export default function StatisticsPage() {
+const StatisticsPage = () => {
 	const { statistics } = useLoaderData<typeof loader>();
 	const [home, away] = statistics;
 	return (
@@ -38,9 +38,8 @@ export default function StatisticsPage() {
 			</table>
 		</div>
 	);
-}
-
-export function ErrorBoundary() {
+};
+export const ErrorBoundary = () => {
 	const error = useRouteError();
 	if (isRouteErrorResponse(error)) {
 		return (
@@ -65,4 +64,6 @@ export function ErrorBoundary() {
 			/>
 		);
 	}
-}
+};
+
+export default StatisticsPage;
