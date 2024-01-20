@@ -48,7 +48,7 @@ export const loader = async () => {
 	return json({ matches, leagueStandings });
 };
 
-export default function Index() {
+const Index = () => {
 	const { matches, leagueStandings } = useLoaderData<typeof loader>();
 
 	return (
@@ -71,9 +71,9 @@ export default function Index() {
 			</section>
 		</div>
 	);
-}
+};
 
-export function ErrorBoundary() {
+export const ErrorBoundary = () => {
 	const error = useRouteError() as Error;
 
 	if (isRouteErrorResponse(error)) {
@@ -115,4 +115,6 @@ export function ErrorBoundary() {
 			</div>
 		);
 	}
-}
+};
+
+export default Index;

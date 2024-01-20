@@ -12,7 +12,7 @@ import MatchDetailsHeader from "~/components/MatchPage/MatchDetailsHeader";
 import MatchDetailsHero from "~/components/MatchPage/MatchDetailsHero";
 import MatchDetailsNavigation from "~/components/MatchPage/MatchDetailsNavigation";
 
-export async function loader({ params }: LoaderFunctionArgs) {
+const loader = async ({ params }: LoaderFunctionArgs) => {
 	const matchId = params.matchId;
 	if (!matchId) {
 		throw new Response("Missing Match Id", { status: 400 });
@@ -20,9 +20,9 @@ export async function loader({ params }: LoaderFunctionArgs) {
 	const match = await getMatchInfo(matchId);
 
 	return json({ match });
-}
+};
 
-export default function MatchInformation() {
+const MatchInformation = () => {
 	const { match } = useLoaderData<typeof loader>();
 	const dateLocalTime = convertDateToLocalTime(match.fixture.date);
 	const date = `${dateLocalTime.day} ${dateLocalTime.month} ${dateLocalTime.year}`;
@@ -53,9 +53,9 @@ export default function MatchInformation() {
 			</section>
 		</div>
 	);
-}
+};
 
-export function ErrorBoundary() {
+export const ErrorBoundary = () => {
 	const error = useRouteError();
 	if (isRouteErrorResponse(error)) {
 		return (
@@ -72,4 +72,6 @@ export function ErrorBoundary() {
 			</div>
 		);
 	}
-}
+};
+
+export default MatchInformation;

@@ -9,21 +9,20 @@ import getMatchLineup from "~/api/getMatchLineup";
 import Lineups from "~/components/Lineups";
 import ErrorCard from "~/components/MatchDataErrorCard";
 
-export async function loader({ params }: LoaderFunctionArgs) {
+const loader = async ({ params }: LoaderFunctionArgs) => {
 	const matchId = params.matchId;
 	if (!matchId) {
 		throw new Response("Missing Match Id", { status: 400 });
 	}
 	const lineups = await getMatchLineup(matchId);
 	return json({ lineups });
-}
-
-export default function LineupPage() {
+};
+const LineupPage = () => {
 	const { lineups } = useLoaderData<typeof loader>();
 	return <Lineups lineups={lineups} />;
-}
+};
 
-export function ErrorBoundary() {
+export const ErrorBoundary = () => {
 	const error = useRouteError();
 	if (isRouteErrorResponse(error)) {
 		return (
@@ -48,4 +47,6 @@ export function ErrorBoundary() {
 			/>
 		);
 	}
-}
+};
+
+export default LineupPage;

@@ -17,8 +17,7 @@ export const loader = async () => {
 	const matches: Match[] = await getLeagueMatches("39", "2023");
 	return json({ matches });
 };
-
-export default function Matches() {
+const Matches = () => {
 	const { matches } = useLoaderData<typeof loader>();
 	const [displayedMatches, setDisplayedMatches] = useState<{
 		typeOfMatches: "upcoming" | "past" | "today";
@@ -119,9 +118,9 @@ export default function Matches() {
 			</main>
 		</div>
 	);
-}
+};
 
-export function ErrorBoundary() {
+export const ErrorBoundary = () => {
 	const error = useRouteError();
 	if (isRouteErrorResponse(error)) {
 		if (error.status === 400) {
@@ -135,4 +134,6 @@ export function ErrorBoundary() {
 		}
 	}
 	return <MatchesError title="Unexpected Error!" message="Check back later." />;
-}
+};
+
+export default Matches;
