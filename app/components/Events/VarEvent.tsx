@@ -1,4 +1,4 @@
-export default function VarEvent({ event }: { event: MatchEvent }) {
+const VarEvent = ({ event }: { event: MatchEvent }) => {
 	return (
 		<tr>
 			<td>
@@ -23,4 +23,6 @@ export default function VarEvent({ event }: { event: MatchEvent }) {
 			<td>{event.comments}</td>
 		</tr>
 	);
-}
+};
+
+export default VarEvent;

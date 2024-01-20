@@ -1,4 +1,4 @@
-export default function CardEvent({ event }: { event: MatchEvent }) {
+const CardEvent = ({ event }: { event: MatchEvent }) => {
 	const rowColor =
 		event.detail === "Yellow Card" ? "bg-amber-100" : "bg-red-100";
 	return (
@@ -27,4 +27,6 @@ export default function CardEvent({ event }: { event: MatchEvent }) {
 			<td>{event.comments}</td>
 		</tr>
 	);
-}
+};
+
+export default CardEvent;
