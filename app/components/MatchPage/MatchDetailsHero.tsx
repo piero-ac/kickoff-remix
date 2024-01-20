@@ -1,4 +1,4 @@
-export default function MatchDetailsHero({
+const MatchDetailsHero = ({
 	fixtureStatus,
 	home,
 	away,
@@ -8,7 +8,7 @@ export default function MatchDetailsHero({
 	home: Team;
 	away: Team;
 	score: Score;
-}) {
+}) => {
 	let fulltimeScore = undefined;
 	let halftimeScore = undefined;
 
@@ -64,4 +64,6 @@ export default function MatchDetailsHero({
 			</div>
 		</>
 	);
-}
+};
+
+export default MatchDetailsHero;

@@ -1,4 +1,4 @@
-export default function Header({
+const Header = ({
 	time,
 	venue,
 	date,
@@ -8,7 +8,7 @@ export default function Header({
 	venue: string;
 	date: string;
 	referee: string | null;
-}) {
+}) => {
 	return (
 		<>
 			<div className="flex flex-row items-center gap-1">
@@ -39,4 +39,6 @@ export default function Header({
 			)}
 		</>
 	);
-}
+};
+
+export default Header;
