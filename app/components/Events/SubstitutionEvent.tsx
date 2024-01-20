@@ -1,4 +1,4 @@
-export default function SubstitutionEvent({ event }: { event: MatchEvent }) {
+const SubstitutionEvent = ({ event }: { event: MatchEvent }) => {
 	return (
 		<tr className="bg-green-100">
 			<td>
@@ -21,4 +21,6 @@ export default function SubstitutionEvent({ event }: { event: MatchEvent }) {
 			<td className="bg-green-100">{event.assist.name}</td>
 		</tr>
 	);
-}
+};
+
+export default SubstitutionEvent;

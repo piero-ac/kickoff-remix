@@ -1,5 +1,6 @@
 import { NavLink } from "@remix-run/react";
-export default function MatchDetailsNavigation() {
+
+const MatchDetailsNavigation = () => {
 	return (
 		<>
 			<NavLink
@@ -28,4 +29,6 @@ export default function MatchDetailsNavigation() {
 			</NavLink>
 		</>
 	);
-}
+};
+
+export default MatchDetailsNavigation;

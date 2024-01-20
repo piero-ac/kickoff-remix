@@ -1,4 +1,4 @@
-export default function MatchStat({
+const MatchStat = ({
 	type,
 	homeValue,
 	awayValue,
@@ -6,7 +6,7 @@ export default function MatchStat({
 	type: string;
 	homeValue: string | number | null;
 	awayValue: string | number | null;
-}) {
+}) => {
 	let statType = undefined;
 	switch (type) {
 		case "expected_goals":
@@ -44,4 +44,6 @@ export default function MatchStat({
 			</tr>
 		</>
 	);
-}
+};
+
+export default MatchStat;

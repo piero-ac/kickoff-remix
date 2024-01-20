@@ -1,4 +1,4 @@
-export default function GoalEvent({ event }: { event: MatchEvent }) {
+const GoalEvent = ({ event }: { event: MatchEvent }) => {
 	return (
 		<tr className="bg-blue-100">
 			<td>
@@ -21,4 +21,6 @@ export default function GoalEvent({ event }: { event: MatchEvent }) {
 			<td>{event.assist.name}</td>
 		</tr>
 	);
-}
+};
+
+export default GoalEvent;

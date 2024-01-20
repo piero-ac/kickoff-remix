@@ -1,4 +1,4 @@
-export default function MatchSelectButton({
+const MatchSelectButton = ({
 	text,
 	selected,
 	onClick,
@@ -6,7 +6,7 @@ export default function MatchSelectButton({
 	text: string;
 	selected?: boolean;
 	onClick?: () => void;
-}) {
+}) => {
 	return (
 		<button
 			className={`text-brightwhite p-1 w-[100px] hover:bg-hotpink hover:font-semibold ${
@@ -17,4 +17,6 @@ export default function MatchSelectButton({
 			{text}
 		</button>
 	);
-}
+};
+
+export default MatchSelectButton;

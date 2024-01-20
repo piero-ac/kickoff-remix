@@ -1,10 +1,10 @@
-export default function MatchTeamCard({
+const MatchTeamCard = ({
 	team: { name, logo },
 	isHomeTeam,
 }: {
 	team: { name: string; logo: string };
 	isHomeTeam: boolean;
-}) {
+}) => {
 	const classes =
 		"text-sm w-[116px] md:min-w-[180px] truncate " +
 		(!isHomeTeam && "text-start");
@@ -37,4 +37,6 @@ export default function MatchTeamCard({
 			)}
 		</p>
 	);
-}
+};
+
+export default MatchTeamCard;

@@ -1,12 +1,13 @@
 import MatchesHeader from "./MatchesHeader";
 import MatchSelectButton from "../MatchSelectButton";
-export default function MatchesError({
+
+const MatchesError = ({
 	title,
 	message,
 }: {
 	title: string;
 	message: string;
-}) {
+}) => {
 	return (
 		<div className="my-1">
 			<MatchesHeader />
@@ -34,4 +35,6 @@ export default function MatchesError({
 			</main>
 		</div>
 	);
-}
+};
+
+export default MatchesError;

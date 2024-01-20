@@ -1,13 +1,13 @@
 import { useNavigate, useLocation } from "@remix-run/react";
 import { convertDateToLocalTime } from "utils/datetime-functions";
 
-export default function MatchSelectCard({
+const MatchSelectCard = ({
 	match,
 	type,
 }: {
 	match: Match;
 	type: "upcoming" | "past" | "today";
-}) {
+}) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const matchId: string | undefined = location.pathname.split("/")[2];
@@ -55,4 +55,6 @@ export default function MatchSelectCard({
 			</div>
 		</div>
 	);
-}
+};
+
+export default MatchSelectCard;

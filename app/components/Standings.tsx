@@ -1,8 +1,4 @@
-export default function Standings({
-	standings,
-}: {
-	standings: TeamStanding[];
-}) {
+const Standings = ({ standings }: { standings: TeamStanding[] }) => {
 	return (
 		<>
 			<h2 className="cyan-gradient text-brightwhite font-bold text-center text-2xl md:text-3xl py-1 rounded-t-lg w-[300px] md:w-[385px]">
@@ -55,4 +51,6 @@ export default function Standings({
 			</table>
 		</>
 	);
-}
+};
+
+export default Standings;

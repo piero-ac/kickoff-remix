@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TeamLineup from "./TeamLineup";
-export default function Lineups({ lineups }: { lineups: Lineup[] }) {
+
+const Lineups = ({ lineups }: { lineups: Lineup[] }) => {
 	const [displayedLineup, setDisplayedLineup] = useState<"home" | "away">(
 		"home"
 	);
@@ -41,4 +42,6 @@ export default function Lineups({ lineups }: { lineups: Lineup[] }) {
 			</section>
 		</>
 	);
-}
+};
+
+export default Lineups;

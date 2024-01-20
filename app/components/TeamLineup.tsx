@@ -1,10 +1,10 @@
-export default function TeamLineup({
+const TeamLineup = ({
 	startXI,
 	substitutes,
 }: {
 	startXI: PlayerLineupInfo[];
 	substitutes: PlayerLineupInfo[];
-}) {
+}) => {
 	const goalkeeper = startXI.filter((player) => player.pos === "G");
 	const defenders = startXI.filter((player) => player.pos === "D");
 	const midfielders = startXI.filter((player) => player.pos === "M");
@@ -60,4 +60,6 @@ export default function TeamLineup({
 			</div>
 		</div>
 	);
-}
+};
+
+export default TeamLineup;
