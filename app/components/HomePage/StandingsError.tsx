@@ -1,10 +1,10 @@
-export default function StandingsError({
+const StandingsError = ({
 	title,
 	message,
 }: {
 	title: string;
 	message: string;
-}) {
+}) => {
 	return (
 		<div>
 			<h2 className="cyan-gradient text-brightwhite font-bold text-center text-2xl md:text-3xl py-1 rounded-t-lg w-[300px] md:w-[385px]">
@@ -18,4 +18,6 @@ export default function StandingsError({
 			</div>
 		</div>
 	);
-}
+};
+
+export default StandingsError;

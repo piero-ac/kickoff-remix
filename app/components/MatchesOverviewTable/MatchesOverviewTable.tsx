@@ -1,7 +1,7 @@
 import { useNavigate } from "@remix-run/react";
 import MatchRow from "./MatchRow";
 
-export default function MatchesOverviewTable({
+const MatchesOverviewTable = ({
 	matches,
 	seasonComplete,
 	today,
@@ -11,7 +11,7 @@ export default function MatchesOverviewTable({
 	seasonComplete: boolean;
 	today: string;
 	nextMatchdate: string;
-}) {
+}) => {
 	const navigate = useNavigate();
 	if (seasonComplete) {
 		return <div className="w-full h-auto">Season Over</div>;
@@ -42,4 +42,6 @@ export default function MatchesOverviewTable({
 			</div>
 		</div>
 	);
-}
+};
+
+export default MatchesOverviewTable;

@@ -3,7 +3,7 @@ import MatchTeamCard from "./MatchTeamCard";
 import MatchStatusCard from "./MatchStatusCard";
 import MatchStadiumCard from "./MatchStadiumCard";
 
-export default function MatchRow({ match }: { match: Match }) {
+const MatchRow = ({ match }: { match: Match }) => {
 	const navigate = useNavigate();
 
 	return (
@@ -20,4 +20,6 @@ export default function MatchRow({ match }: { match: Match }) {
 			<MatchStadiumCard name={match.fixture.venue.name} />
 		</div>
 	);
-}
+};
+
+export default MatchRow;
