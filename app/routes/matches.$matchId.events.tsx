@@ -5,7 +5,9 @@ import {
 	useRouteError,
 	isRouteErrorResponse,
 } from "@remix-run/react";
+
 import getMatchEvents from "~/api/getMatchEvents";
+
 import CardEvent from "~/components/MatchEvents/CardEvent";
 import GoalEvent from "~/components/MatchEvents/GoalEvent";
 import SubstitutionEvent from "~/components/MatchEvents/SubstitutionEvent";
