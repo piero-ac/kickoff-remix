@@ -5,9 +5,11 @@ import {
 	useLoaderData,
 	useRouteError,
 } from "@remix-run/react";
+
 import getMatchStatistics from "~/api/getMatchStatistics";
-import MatchStat from "~/components/MatchStat";
-import ErrorCard from "~/components/MatchDataErrorCard";
+
+import MatchStat from "~/components/MatchDetails/Statistics";
+import ErrorCard from "~/components/Errors/MatchDataErrorCard";
 
 const loader = async ({ params }: LoaderFunctionArgs) => {
 	const matchId = params.matchId;

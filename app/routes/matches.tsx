@@ -5,13 +5,15 @@ import {
 	useRouteError,
 	isRouteErrorResponse,
 } from "@remix-run/react";
-import getLeagueMatches from "~/api/getLeagueMatches";
-import MatchSelectButton from "~/components/MatchSelectButton";
-import { getDate } from "utils/datetime-functions";
 import { useState } from "react";
-import MatchSelectCard from "~/components/MatchSelectCard";
-import MatchesHeader from "~/components/MatchesPage/MatchesHeader";
-import MatchesError from "~/components/MatchesPage/MatchesError";
+
+import getLeagueMatches from "~/api/getLeagueMatches";
+import { getDate } from "utils/datetime-functions";
+
+import MatchSelectButton from "~/components/MatchSelect/MatchSelectButton";
+import MatchSelectCard from "~/components/MatchSelect/MatchSelectCard";
+import MatchesHeader from "~/components/MatchesHeader";
+import MatchesError from "~/components/Errors/MatchesError";
 
 export const loader = async () => {
 	const matches: Match[] = await getLeagueMatches("39", "2023");
