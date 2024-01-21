@@ -1,5 +1,5 @@
 import MatchesHeader from "./MatchesHeader";
-import MatchSelectButton from "../MatchSelectButton";
+import MatchSelectButton from "../MatchSelect/MatchSelectButton";
 
 const MatchesError = ({
 	title,
