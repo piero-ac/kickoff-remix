@@ -6,10 +6,10 @@ import {
 	isRouteErrorResponse,
 } from "@remix-run/react";
 import getMatchEvents from "~/api/getMatchEvents";
-import CardEvent from "~/components/Events/CardEvent";
-import GoalEvent from "~/components/Events/GoalEvent";
-import SubstitutionEvent from "~/components/Events/SubstitutionEvent";
-import VarEvent from "~/components/Events/VarEvent";
+import CardEvent from "~/components/MatchEvents/CardEvent";
+import GoalEvent from "~/components/MatchEvents/GoalEvent";
+import SubstitutionEvent from "~/components/MatchEvents/SubstitutionEvent";
+import VarEvent from "~/components/MatchEvents/VarEvent";
 import ErrorCard from "~/components/Errors/MatchDataErrorCard";
 
 const loader = async ({ params }: LoaderFunctionArgs) => {
