@@ -8,9 +8,9 @@ import {
 } from "@remix-run/react";
 import getMatchInfo from "~/api/getMatchInfo";
 import { convertDateToLocalTime } from "utils/datetime-functions";
-import MatchDetailsHeader from "~/components/MatchPage/MatchDetailsHeader";
-import MatchDetailsHero from "~/components/MatchPage/MatchDetailsHero";
-import MatchDetailsNavigation from "~/components/MatchPage/MatchDetailsNavigation";
+import MatchDetailsHeader from "~/components/MatchDetails/MatchDetailsHeader";
+import MatchDetailsHero from "~/components/MatchDetails/MatchDetailsHero";
+import MatchDetailsNavigation from "~/components/MatchDetails/MatchDetailsNavigation";
 
 const loader = async ({ params }: LoaderFunctionArgs) => {
 	const matchId = params.matchId;

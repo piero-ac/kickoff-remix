@@ -6,7 +6,7 @@ import {
 	isRouteErrorResponse,
 } from "@remix-run/react";
 import getMatchLineup from "~/api/getMatchLineup";
-import Lineups from "~/components/Lineups";
+import Lineups from "~/components/MatchDetails/Lineups";
 import ErrorCard from "~/components/Errors/MatchDataErrorCard";
 
 const loader = async ({ params }: LoaderFunctionArgs) => {

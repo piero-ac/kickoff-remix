@@ -11,8 +11,8 @@ import getMatchdates from "~/api/getMatchdates";
 import { getDate, getNextMatchdate } from "utils/datetime-functions";
 import Standings from "~/components/Standings";
 import MatchesOverviewTable from "~/components/MatchesOverviewTable/MatchesOverviewTable";
-import HomeHeader from "~/components/HomePage/HomeHeader";
-import StandingsError from "~/components/HomePage/StandingsError";
+import HomeHeader from "~/components/HomeHeader";
+import StandingsError from "~/components/Errors/StandingsError";
 
 export const meta: MetaFunction = () => {
 	return [
