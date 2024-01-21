@@ -7,7 +7,7 @@ import {
 } from "@remix-run/react";
 import getMatchStatistics from "~/api/getMatchStatistics";
 import MatchStat from "~/components/MatchStat";
-import ErrorCard from "~/components/MatchDataErrorCard";
+import ErrorCard from "~/components/Errors/MatchDataErrorCard";
 
 const loader = async ({ params }: LoaderFunctionArgs) => {
 	const matchId = params.matchId;

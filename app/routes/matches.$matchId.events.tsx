@@ -10,7 +10,7 @@ import CardEvent from "~/components/Events/CardEvent";
 import GoalEvent from "~/components/Events/GoalEvent";
 import SubstitutionEvent from "~/components/Events/SubstitutionEvent";
 import VarEvent from "~/components/Events/VarEvent";
-import ErrorCard from "~/components/MatchDataErrorCard";
+import ErrorCard from "~/components/Errors/MatchDataErrorCard";
 
 const loader = async ({ params }: LoaderFunctionArgs) => {
 	const matchId = params.matchId;
